@@ -33,7 +33,7 @@ Ruta_RegistroIng.post('/guardar',(peticion,respuesta)=>{
     var total=peticion.body.total;
  
     var sql =`insert into ingresos (ofrenda,diezmo,primicia,otros,fecha_i,personas,total_ingreso) values(${ofrenda},${diezmo},${primicia},${otros}, '${fecha}',${id_persona},'${total}')`;
-    //var sql2=`insert into caja (Total_ingreso)values ('${total}')`;
+    
    console.log(sql)
    console.log(sql2)
     conexion.query(sql,sql2,(err,rows,fields)=>{
