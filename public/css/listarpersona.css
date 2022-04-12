@@ -1,0 +1,123 @@
+
+h4{
+    text-align: center;
+    font-family: cursive;
+}
+
+
+
+
+
+/* div principal  */
+.container{
+    margin-top: 2px;
+    padding: 3px;
+    width: 100%;
+    background-color: rgba(237, 235, 235, 0.2);
+    box-shadow: 0 0 5px;
+    
+
+}
+/* div container img */
+#conteI{
+    float: right;
+}
+
+/* div del modal editar persona */
+.container img{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    
+    
+}
+
+label{
+    font-weight: bolder;
+    font-family: cursive;
+}
+.dropdown-menu ul li{
+    background-color:whitesmoke;
+}
+
+.card{
+    border: solid 3.5px white;
+    width: 18rem;
+    height: 17rem;
+    position: relative;
+    padding: 3px;
+    margin-left: -3em;
+    float: right;    
+}
+.footer{
+    margin-bottom: -4em;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+#btn-nuevo{
+    text-align: center;
+    color: white;
+}
+.modal-footer{
+    margin: 0 auto;
+}
+
+
+
+
+/* tabla listar persona */
+
+
+table th {
+    background-color: #acabab !important;
+    color: white;
+    overflow: auto;
+    
+    
+}
+
+table>tbody>tr>td>a {
+    vertical-align: middle !important;
+    text-decoration: none;
+    font-family: cursive;
+    font-weight: bold;
+    
+}
+#tabla_filter{
+    float: right;
+    margin-bottom: 3px;
+    
+}
+#tabla_paginate {
+    float: right;
+   
+}
+
+#tabla_paginate:hover{
+    cursor: pointer;
+}
+.btn >a{
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+}
+/* parte del navbar */
+.fin{
+    
+    list-style: none;
+    text-decoration: none;
+    float: center;
+    color: white;
+    margin-right:  -0.1em; ;
+}
+
+li .nav-cerrar{
+    float: right;
+    list-style: none;
+    text-decoration: none;
+}

@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ES-MX">
+<head>
+    <title>Registros_Ingresos</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- link de bootstrap -->
+    <link href="/Enlaces/links/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    
+      <!-- link de icono ventana -->
+      <link rel="shortcut icon" type="image/png" href="/img/icono.png">
+      <!-- link css -->
+      <link rel="stylesheet" href="/css/registro_ingre.css">
+    <!-- para datatable -->
+  <!--   <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap5.min.js"></script> -->
+    <!-- link de script -->
+   
+</head>
+<body>
+    <!-- barra de navegación -->
+    
+    <%- include ('barra_nav')%>
+
+    
+    <!-- inicio Modal -->
+    <!--  data-bs-backdrop="static" -->
+    <!-- Button trigger modal -->
+   
+  <!-- Modal -->
+  <div class="modal fade" id="btnper"  data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable" >
+      <div class="modal-content">
+        <div class="modal-header" >
+          <h5 class="modal-title" id="staticBackdropLabel"> Buscar Persona</h5>
+          
+         <!--  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+         
+        </div>
+        <div class="input-group col md-6">
+          <input class="form-control" id="datos" type="number"  onkeyup="Buscar_datos();" placeholder="Buscar Documento"  data-toggle="tooltip" data-placement="top" title="Su busqueda solo la realizara por número de Documento">
+         
+          <span class="input-group-btn">
+           <button class="btn btn-light " type="button" onclick="Buscar_datos();" id="boton">
+              <img  src="/img/buscar.png" alt="">Buscar
+              <span class="fa fa-eye-slash "></span>
+           </button>
+          </span>
+         
+          </div>
+        <div class="modal-body">
+          <!--  <button type="button" class="btn " onclick="listar_personas()"></button> -->
+          <table class="table table-hover" id="tabla">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">identificacion</th>
+                <th scope="col">Nombres</th>
+                <th scope="col">Dirección</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Tipo de Persona</th>
+                <th scope="col">Elegir</th>
+              </tr>
+            </thead>
+            <tbody id="tablas">
+              <tr>
+                <th ></th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>              
+            </tbody>
+          </table>
+         
+        </div>
+        <div class="modal-footer ">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" >Cerrar</button>
+         <!--  <button type="button" class="btn btn-primary">Guardar</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- fin del modal-1 -->
+
+    
+
+  
+  
+  <h4>Registros de Ingresos</h4>
+
+<div class="container">
+  
+  <div class="row">
+        <div class="col-md-12 row p-2">
+              <div class="text-end">
+                <button  type="button" id="btnper" class= " btn btn-light"  style="background: #f7c738;" data-bs-toggle="modal" data-bs-target="#btnper" title="Haz clic para que puedas seleccionar una persona" >
+                  <img src="img/buscar.png" alt="" >
+                  Buscar_Persona
+                </button>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Fecha Ingreso</label>
+                <input class="form-control" type="date" id="fecha"><br>
+              </div>
+              <div class="col-md-6"><input type="hidden">
+              </div>
+                <div class="col-md-6 ">
+                  <label for="inputEmail4" class="form-label">Nombres</label>
+                  <input type="text" id="nombre_p" class="form-control" placeholder="Nombre_Persona" aria-label="Nombre_Persona" disabled>
+                  <input type="hidden" id="id_persona" class="form-control" value="" aria-label="Nombre_Persona">
+                </div>
+                <div class="col-md-6">
+                <label for="inputPassword4" class="form-label">N°-Identificación</label>
+                <input type="number" id="identificacion_p" class="form-control" placeholder="Documento" aria-label="Documento" disabled><br><br>
+                </div>
+                  <div class="col-md-6">
+                  <label for="inputPassword4" class="form-label">Ofrendas</label>
+                  <input type="text" id="ofrenda" class="form-control" placeholder="$Ofrenda" aria-label="Documento"value=0 onkeyup="total(),format(this)" onchange="format(this)">
+                 </div>
+                  <div class="col-md-6">
+                    <label for="inputPassword4" class="form-label">Diezmos</label>
+                    <input type="text" id="diezmo" class="form-control" placeholder="$Diezmo" aria-label="Documento"value=0 onkeyup="total() ,format(this)"  onchange="format(this)">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="inputPassword4" class="form-label">Primicias</label>
+                  <input type="text" id="primicia" class="form-control" placeholder="$Primicia" aria-label="Documento" value=0 onkeyup="total(),format(this) " onchange="format(this)" >
+                 </div>
+                  <div class="col-md-6">
+                    <label for="inputPassword4" class="form-label">Otros</label>
+                  <input type="text" id="otros" class="form-control" placeholder="Otros" aria-label="Documento" value=0 onkeyup="total() ,format(this)"  onchange="format(this)"> 
+                  </div>
+
+                <div class="col-md-6">
+                  <label for="inputPassword4" class="form-label" >Total</label>
+                <input type="text" onkeyup="total(),format(this)" onchange="format(this)" id="total" class="form-control" value="" placeholder="$" aria-label="Documento">
+                </div>
+             
+                
+              
+                          <div class="row">
+                              <div class="col"></div>
+                              <div class="col-md-4">
+                                <div class="d-grid text-center">
+                                  <button id="guar" type="button" class="btn btn-li btn-light btn-lg" onclick="Guardar();"> Guardar</button>
+                                </div>
+
+                              </div>
+                              <div class="col"></div>
+              
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+      </div>
+      
+  </div>
+</div>
+  
+      <!-- script propio -->
+      <script src="/js/script_cumple.js"></script>
+</body>
+    
+<script>
+  listar_personas();
+  
+  
+  function listar_personas(){
+    
+    fetch('/Registros/listar_personas',{
+      method:'get'
+
+  })
+  .then(resp=>resp.json())
+  .then(data=>{
+ 
+       
+
+    var html='';
+    for (var i in data){
+          html+=`<tr><td>${data[i].id_persona}</td>
+            <td>${data[i].identificacion_p}</td>
+            <td>${data[i].nombre_p}</td>
+            <td>${data[i].direccion}</td>
+            <td>${data[i].telefono}</td>
+            <td>${data[i].rol_per}</td>
+            <td> 
+                  <a href ='javascript:Buscar_persona(${data[i].id_persona})'>Seleccionar</a>
+              
+            </td>
+            </tr>`;
+      }
+      document.getElementById("tablas").innerHTML=html;
+     /*  document.getElementById("msg").innerHTML="<div class='alert alert-primary'role='alert'>Se listo la Noticia </div>"; */
+    
+  });
+  }
+
+  
+function Buscar_datos(){
+
+var id = document.getElementById('datos').value;
+
+const datos = new URLSearchParams();
+//valida que no se vaya vacio//
+if(id==''){
+  //alert('Debe escribir un Dato');
+  listar_personas();
+    return false;
+    
+  }
+
+datos.append('datos', id);
+
+fetch('/Registros/Buscar_datos',{
+method: 'post',
+body: datos
+})
+.then(resp=>resp.json())
+.then(data=>{
+    
+
+  
+    var html = '';
+
+    for(var i in data){
+  
+        html+=`<tr>
+                    <td>${data[i].id_persona}</td>              
+                    <td>${data[i].identificacion_p}</td>
+                    <td>${data[i].nombre_p}</td>
+                    <td>${data[i].direccion}</td>
+                    <td>${data[i].telefono}</td>
+                    <td>${data[i].rol_per}</td>
+                   <td> <a href ='javascript:Buscar_persona(${data[i].id_persona})'>Seleccionar</a></td>
+     
+                    </td>
+                <td>`
+    }
+  
+    
+    document.getElementById('tablas').innerHTML=html;
+   
+    
+})
+
+
+
+
+}
+
+
+    
+  /* funcion para agregar puntuación a los valores */
+  function format(input)
+{
+var num = input.value.replace(/\./g,'');
+if(!isNaN(num)){
+num = num.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g,'$1.');
+num = num.split('').reverse().join('').replace(/^[\.]/,'');
+input.value = num;
+}
+  
+else{ alert('Solo se permiten numeros');
+input.value = input.value.replace(/[^\d\.]*/g,'');
+}
+}
+    
+    
+  
+
+    function total(){
+      var ofrenda= document.getElementById('ofrenda').value;
+      var diezmo= document.getElementById('diezmo').value;
+      var primicia= document.getElementById('primicia').value;
+      var otros= document.getElementById('otros').value;
+      var total= document.getElementById('total').value;
+      ofrenda=ofrenda.replace('.','');
+      diezmo=diezmo.replace('.','');
+      primicia=primicia.replace('.','');
+      otros=otros.replace('.','');
+
+      var totalfinal= parseFloat(ofrenda) + parseFloat(diezmo) + parseFloat(primicia) + parseFloat(otros);
+      
+      console.log( totalfinal);
+      document.getElementById('total').value=totalfinal;
+      
+
+      
+
+    }
+   
+    
+ 
+    function Guardar(){
+      /* var nombre_p= document.getElementById('nombre_p').value; */
+      
+      var ofrenda = document.getElementById('ofrenda').value;
+      var diezmo = document.getElementById('diezmo').value;
+      var primicia = document.getElementById('primicia').value;
+      var otros= document.getElementById('otros').value;
+      var fechaActual = document.getElementById('fecha').value;
+      var id_persona= document.getElementById('id_persona').value;
+      var total = document.getElementById('total').value;
+      
+      ofrenda=ofrenda.replace('.','');
+      diezmo=diezmo.replace('.','');
+      primicia=primicia.replace('.','');
+      otros=otros.replace('.','');
+      
+     
+
+      const datos=new URLSearchParams();
+
+      /* datos.append('nombre_p',nombre_p); */
+      
+     
+      datos.append('ofrenda',ofrenda);
+      datos.append('diezmo',diezmo);
+      datos.append('primicia',primicia);
+      datos.append('otros',otros);
+      datos.append('fecha',fechaActual);
+      datos.append('id_persona',id_persona);
+      datos.append('total',total);
+
+      
+
+      fetch('/RegistroIng/guardar',{
+        
+        method:'post',
+        body:datos
+      })
+      .then(res=>res.text())
+      .then(data=>{
+
+        alert(data);
+        ofrenda = document.getElementById('ofrenda').value="";
+        diezmo = document.getElementById('diezmo').value="";
+        primicia = document.getElementById('primicia').value="";
+        otros= document.getElementById('otros').value="";
+        id_persona= document.getElementById('id_persona').value="";
+        total = document.getElementById('total').value="";
+        
+       
+
+      });
+    }
+
+    // Fecha
+    fechaactual();
+     function fechaactual(){
+     
+      var fecha = new Date(); //Fecha actual
+      var ano = fecha.getFullYear(); //obteniendo año
+      var mes = fecha.getMonth()+1; //obteniendo mes
+      var dia = fecha.getDate(); //obteniendo dia
+      if(dia<10)
+        dia='0'+dia; //agrega cero si el menor de 10
+      if(mes<10)
+        mes='0'+mes //agrega cero si el menor de 10
+     
+    
+      document.getElementById('fecha').value = ano + '-' + mes + '-' + dia;
+    }
+    
+/*esta funcion buscca y llena los input de regis ingre */
+    function Buscar_persona(id){
+    
+    const datos= new URLSearchParams();
+    datos.append('id_persona',id);
+
+    fetch('/RegistroIng/Buscar_persona',{
+      method:'post',
+      body:datos
+    })
+  .then(resp=>resp.json())
+  .then(data=>{
+   
+    for (var i in data)
+       {
+          document.getElementById("id_persona").value=id;
+          document.getElementById("identificacion_p").value=data[i].identificacion_p;
+          document.getElementById("nombre_p").value=data[i].nombre_p;
+          document.getElementById("rol_per").value=data[i].rol_per;
+          
+        
+      }
+      document.getElementById('tabla').innerHTML=html;
+  });
+}
+  
+
+
+ 
+    
+
+</script>

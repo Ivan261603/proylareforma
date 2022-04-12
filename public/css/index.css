@@ -1,0 +1,155 @@
+
+h4{
+    text-align: center;
+    font-family: cursive;
+}
+*{
+    padding: 2px;
+}
+body{
+    background-color: #efb810;
+   
+}
+/* parte de navbar */
+.fin{
+    
+    list-style: none;
+    text-decoration: none;
+    float: right;
+    color: white;
+    margin-right:  -0.1em; ;
+}
+li .nav-cerrar{
+    float: right;
+    list-style: none;
+    text-decoration: none;
+}
+
+
+/* container de registro persona principal */
+
+.container{
+    margin-top: 1.5em;
+    border:solid 1px #efb71058;
+    background-color: rgba(237, 235, 235, 0.2);
+    /* margin: 0 auto; */
+    box-shadow: 0 0 5px;
+
+  
+    
+}
+/* container de la foto de persona */
+#contImag{
+    float: right;
+    
+}
+.container img{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+#imgsub{
+    margin-bottom:2px ;
+}
+
+.card{
+    border: solid 3.5px white;
+    width: 18rem;
+    height: 17rem;
+    position: relative;
+    padding: 3px;
+    margin-left: -3em;
+    float: right;
+    
+    
+}
+#imgUpload{
+    display: none;
+}
+.btn{
+    width: 100%;
+    color: white;
+    font-weight: bold;
+    font-family: cursive;
+    border: solid 1px white;
+    
+}
+.footer{
+    margin-bottom: -3em;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;  
+
+}
+
+
+.dropdown-menu ul li{
+    background-color:whitesmoke;
+}
+
+/* form >div{
+    float: left;
+    margin: 0 auto;
+    margin-left: 50px;
+} */
+label{
+    font-weight: bolder;
+    font-family: cursive;
+}
+.foto{
+    
+    padding: 7px;
+    height: 30rem;
+    
+}
+.imgfoto{
+    position: absolute;
+    
+    
+    }
+    .inpfoto{
+        color: white;
+        padding: 5px;
+        font-size: 14px;
+        background-color: #efb810;
+        margin-top: 1em;
+    }
+  /*   .footer{
+        font-family: cursive;
+       /*  background-color: #efb810; 
+        position: absolute;
+        bottom: 0px;
+        left: 0;
+        right: 0;
+        text-align:center;
+        padding: 5px;
+    
+    }
+    */
+    
+  
+    
+    #btn-nuevo{
+        margin-top: 1em;
+        background-color: #efb810;
+        color: white;
+        font-family: cursive;
+        border-radius: 7px;
+        
+        
+        
+        
+        
+        
+    
+    }
+    #btn-per{
+        background-color: #efb810;
+        /*  width: 15%; */
+        
+        /* padding: 5px; */ 
+    }

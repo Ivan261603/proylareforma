@@ -1,0 +1,170 @@
+body{
+    
+    background-color: skyblue;
+}
+/* botones de arri de la tabla */
+.dt-button.green{
+    color: rgb(63, 235, 120);
+    background-color: rgb(247, 248, 247);
+}
+.dt-button.red{
+    color: rgb(228, 39, 39);
+    background-color: rgb(241, 241, 241);
+}
+.dt-button.black{
+    color: rgb(24, 23, 23);
+    background-color: rgb(236, 232, 232);
+}
+
+h3{
+    text-align: center;
+    font-family: cursive;
+    float: left;
+   
+}
+h5{ 
+    
+    text-align: center;
+    font-family: cursive;
+  
+    
+}
+/* totale final */
+span#tota{
+    font-weight: bold;
+}
+
+/* contenedor principal */
+.container {
+    padding: 3px;
+    width: 100%;
+    background-color: rgba(237, 235, 235, 0.2);
+    box-shadow: 0 0 5px;
+    margin-top: 4px;
+    
+}
+
+ 
+
+/*estilos para la tabla*/
+table th {
+    background-color: #acabab !important;
+    color: white;
+    font-family: cursive;
+    text-align: center;
+    box-shadow: 0 0 5px  #acabab;
+    padding: 5px;
+}
+
+
+table>tbody>tr>td {
+    text-align: center;
+    vertical-align: middle !important;
+    
+  
+} 
+
+
+#ttt{
+    text-align: right;
+    
+}
+#totEgre{
+    text-align: right;
+    background-color: #acabab;
+    color: white;
+    font-family: cursive;
+    font-weight: bold;
+    
+}
+
+#tabla_filter{
+    margin-bottom: 5px;
+} 
+#tablaE_filter{
+    margin-bottom: 5px;
+}   
+
+
+/* boton de excel */
+/* .excel{
+    width: 57px;
+    padding: 3px;
+    border-radius: 25px;
+} */
+/* .excel2{
+    width: 57px;
+    padding: 3px;
+    border-radius: 25px;
+} */
+
+/* #excel{
+    
+    float: left;
+    margin-bottom: 4px;
+    border-radius: 0px;
+    border: solid 1px green;
+    box-shadow: 0 0 3px;
+   
+} */
+/* #excel2{
+    float: left;
+    border-radius: 0px;
+    border: solid 1px green;
+    margin-bottom: 4px;
+    box-shadow: 0 0 5px;
+}
+ */
+
+/* div donde estan las tablas */
+
+#tabla1{
+    overflow: auto;
+    height: 100%;
+    overflow-x: hidden;
+    border-radius: 7px;
+    border: solid ghostwhite;
+    padding: 5px;
+}
+
+ 
+
+#tabla2E{
+    overflow: auto;
+    width: 100%;
+    overflow-x: hidden;
+    border-radius: 7px;
+    border: solid ghostwhite;
+    padding: 5px;
+}
+/* #tt{
+    float: right;
+    background-color: #eeebeb;
+    padding: 5px;
+    font-weight: bolder;
+} */
+
+/* #tablas{
+    width: 1100px;
+    height: 1000px;
+    overflow: scroll;
+
+} */
+.fin{
+    
+    list-style: none;
+    text-decoration: none;
+    float: right;
+    color: white;
+    margin-right:  -0.1em; ;
+}
+/* div de las fechas */
+
+   
+
+ label{
+    text-align: center;
+    margin: 0 auto;
+    
+ 
+}

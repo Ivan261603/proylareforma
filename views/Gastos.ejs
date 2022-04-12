@@ -1,0 +1,135 @@
+<head>
+    <title>Gastos</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- link de bootstrap -->
+    <link href="/Enlaces/links/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+   <!--  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous"> -->
+    <!-- link de script -->
+     <!-- link de icono ventana -->
+     <link rel="shortcut icon" type="image/png" href="/img/icono.png">
+    <!-- link css -->
+    <link rel="stylesheet" href="/css/gastos.css">
+    
+</head>
+<body>
+    <%- include ('barra_nav')%>
+    <h3> Gastos</h3>
+
+    <div class="container">
+        <div class="row">
+            <div class=" col-md-12 row p-2">
+                <div class="col-md-12">
+                    <div class="col-md-2">
+                    <label class="form-label">Fecha Gasto</label>
+                    <input class="form-control" type="date" name="fecha" id="fecha">
+                    </div>
+                    <div class="col-md-6">
+                    <label  class="form-label">Tipo de Gasto</label>
+                    <select class="form-select" id="tipo" aria-label="Default select example">
+                        <option selected>Seleccione El Concepto</option>
+                        <option >Servicios</option>
+                        <option >Gastos Generales</option>
+                        <option >Otros</option>
+                      </select>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="exampleFormControlTextarea1" class="form-label">Descripción</label>
+                        <textarea class="form-control" id="Concepto" rows="3"></textarea>
+                    </div>
+
+                    <div class="col-md-8">
+                        <div class="col-6">
+                            <label  class="form-label">Valor</label>
+                            <input type="text" onkeyup="format(this)" onchange="format(this)" id="total" class="form-control"  aria-label="First name" placeholder="$"><br>
+                        </div>
+                        
+                    </div>
+                     
+ 
+                </div>
+                <div class="row">
+                    <div class="col" ></div>
+                    <div class="col-md-4">
+                        <div class="d-grid">
+                            <button id="guardar" class="btn btn-light btn-lg" onclick="Guardar();" type="button">Guardar Gasto</button>
+                        </div>
+
+                    </div>
+                    <div class="col" ></div>
+                </div>
+
+              
+              
+
+
+            </div>
+        </div>
+
+    </div>
+</body>
+<script>
+    function Guardar(){
+        var fechaactual=document.getElementById('fecha').value;
+        var tipo=document.getElementById('tipo').value;
+        var Concepto=document.getElementById('Concepto').value;
+        var total=document.getElementById('total').value;
+        total=total.replace('.','');
+        const datos= new URLSearchParams();
+
+        datos.append('fecha',fechaactual);
+        datos.append('tipo',tipo);
+        datos.append('Concepto',Concepto);
+        datos.append('total',total);
+
+        fetch('/Gastos/guardargastos',{
+            method:'post',
+            body:datos
+        })
+        .then(res=>res.text())
+        .then(data=>{
+
+            alert(data);
+            document.getElementById('tipo').value='';
+            document.getElementById('Concepto').value='';
+            document.getElementById('total').value='';
+
+        });
+       
+    }
+/* funcion para agregar puntuación a los valores */
+    function format(input)
+    {
+    var num = input.value.replace(/\./g,'');
+    if(!isNaN(num)){
+    num = num.toString().split('').reverse().join('').replace(/(?=\d*\.?)(\d{3})/g,'$1.');
+    num = num.split('').reverse().join('').replace(/^[\.]/,'');
+    input.value = num;
+    }
+    
+    else{ alert('Solo se permiten numeros');
+    input.value = input.value.replace(/[^\d\.]*/g,'');
+    }
+    }
+
+
+
+    // Fecha
+    fechaactual();
+     function fechaactual(){
+     
+      var fecha = new Date(); //Fecha actual
+      var ano = fecha.getFullYear(); //obteniendo año
+      var mes = fecha.getMonth()+1; //obteniendo mes
+      var dia = fecha.getDate(); //obteniendo dia
+      if(dia<10)
+        dia='0'+dia; //agrega cero si el menor de 10
+      if(mes<10)
+        mes='0'+mes //agrega cero si el menor de 10
+     
+    
+      document.getElementById('fecha').value = ano + '-' + mes + '-' + dia;
+    }
+</script>

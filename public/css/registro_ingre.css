@@ -1,0 +1,133 @@
+*{
+    padding: 2px;
+}
+
+h4{
+    text-align: center;
+    font-family: cursive;
+}
+
+/* parte de navbar */
+.fin{
+    
+    list-style: none;
+    text-decoration: none;
+    float: right;
+    color: white;
+    margin-right:  -0.1em; ;
+}
+li .nav-cerrar{
+    float: right;
+    list-style: none;
+    text-decoration: none;
+}
+/* container de ingresos */
+.container{
+    border:solid 1px #efb71058;
+    background-color: rgba(237, 235, 235, 0.2);
+    width: 100%; 
+    box-shadow: 0 0 5px;
+    
+}
+img{
+    width: 40px;
+}
+label{
+    font-weight: bolder;
+    font-family: cursive;
+}
+
+/* estilo de la tabla */
+/* .table{
+    text-align:center ;
+} */
+.btn{
+   
+    
+    padding: 5px;
+}
+#btnper{
+    color: white;
+    border-radius: 7px;
+    
+}
+#guar{
+    background-color: #f8bf13;
+    color: white;
+    margin-top: 2em;
+}
+/* carrusel */
+.body{
+    
+    border: none;
+   
+    width: 60%;
+    float: left;
+    
+   /*  height: 60%; */
+}
+/* estilos del modal buscar personas */
+
+.modal-header{
+    background-color: #f7c738;
+    
+}
+h5{
+    text-align: center;
+    margin: 0 auto;
+    color: rgb(253, 253, 253);
+    font-family: cursive;
+    
+}
+
+
+/* footer de todo body inicio */
+
+
+
+.re_nu{
+    float: right;
+    margin-right: 2em;
+}
+.validar >input{
+    margin-top: 5px;
+    border-radius: 7px;
+    padding: 5px;
+    
+}
+
+
+
+
+
+/* from general */
+/* form {
+    display: block;
+    
+    margin-left: 5em;
+    margin: 0 auto 0 auto;
+    border-radius: 7px;
+    border: solid grey;
+} */
+#ini{
+    color: white;
+  /*   margin-right: 3em;
+    margin-left: 2.5em; */
+    background-color: #f7c738;
+}
+/* botones ingreso modal */
+
+#btn-elem{
+    background-color: #f7c738;
+    
+    
+
+}
+/* botones dentro del modal */
+.modal-footer{
+    margin: 0 auto 0 auto;
+}
+/* formulario validar */
+
+
+    

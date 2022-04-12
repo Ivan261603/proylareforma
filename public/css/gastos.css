@@ -1,0 +1,58 @@
+*{
+    padding: 2px;
+}
+
+h3{
+    text-align: center;
+    font-family: cursive;
+}
+/* botones de arri de la tabla */
+.dt-button.green{
+    color: rgb(63, 235, 120);
+    background-color: rgb(247, 248, 247);
+}
+.dt-button.red{
+    color: rgb(228, 39, 39);
+    background-color: rgb(241, 241, 241);
+}
+.dt-button.black{
+    color: rgb(24, 23, 23);
+    background-color: rgb(236, 232, 232);
+}
+
+
+
+/* div principal  */
+.container{
+    border: solid 1px goldenrod;
+    background-color: rgba(237, 235, 235, 0.2);
+    box-shadow: 0 0 5px;
+}
+#guardar{
+    color: white;
+    background-color: #efb810;
+    border-radius: 7px;
+    border: solid 1px rgb(148, 143, 143);
+    box-shadow: 0 0 5px;
+    
+    
+}
+label{
+    font-family: cursive;
+}
+/* parte del navbar */
+.fin{
+    
+    list-style: none;
+    text-decoration: none;
+    float: center;
+    color: white;
+    margin-right:  -0.1em; ;
+}
+
+li .nav-cerrar{
+    float: right;
+    list-style: none;
+    text-decoration: none;
+}
+

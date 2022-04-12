@@ -1,0 +1,202 @@
+
+
+<head>
+    <title>Validar</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- link de bootstrap -->
+    <link href="/Enlaces/links/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <!-- link de icono ventana -->
+    <link rel="shortcut icon" type="image/png" href="/img/icono.png">
+    
+    <!-- link css -->
+    <link rel="stylesheet" href="/css/validacion.css">
+</head>
+
+<body>
+
+
+      <!-- barra de navegación -->
+     <!--  <nav class="navbar navbar-expand-lg navbar-light" >
+       
+      </nav> -->
+    
+               
+
+    <!-- inicio carrusel -->
+    <!-- <div class="bodyValidar">
+      <img src="/img/validar.jpg"  alt="...">
+
+      <footer>
+        
+      </footer>
+        
+    </div> -->
+    <!-- fin carrusel -->
+    
+<!-- form de login -->
+<div class="container w-77 bg-warning mt-5 rounded shadow">
+  <div class="row align-items-stretch">
+    <div class="col bg d-none d-lg-block col-md-5 col-lg-5 col-xl-6 rounded"></div>
+
+    <div class="col bg-white p-5 rounded-end">
+        <div class="text-end">
+          <img src="img/icono.png" width="47" alt="">
+        </div>
+        <h3 class="fw-bold py-5">Bienvenido</h3>  
+        <form id="formulario" class="validar" action="/inicio/validar" method="POST">
+          <div class="mb-4">
+            <label for="text" class="form-label" >Ingrese Usuario</label>
+            <input class="form-control" type="text" placeholder="&#128100 Usuario" name="usuario" required>
+          </div>
+          <div class="mb-4">
+            <label class="form-label" >Ingrese Contraseña</label>
+            <input class="form-control" type="password" placeholder="&#128274 Contraseña" name="contraseña" required>
+          </div>
+          
+         
+          <div class="d-grid">
+            <button id="ini" class="btn btn-warning mt-5 ">Iniciar Sesión</button>
+
+          </div>
+          <div class="my-3">
+            <span><a type="button" class="" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              Registrar Nuevo
+            </a></span>
+          </div>
+  
+         
+  
+          <!-- <button type="button" id="cer" class="btn btn-secondary mt-5">Cerrar Sección</button> -->
+      </form>
+
+      <div class="footer">
+       
+      </div>
+
+      
+    </div>
+  </div>
+
+    
+
+ 
+
+  <!-- inicio modal -->
+      <!-- Button trigger modal -->
+      
+     
+
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header "  style=" background-color: #efb810;">
+              <h5 class="modal-title " id="exampleModalLabel">Registrar Nuevo Usuario</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <!--  inicio from modal -->
+              <form class="row g-3">
+                <div class="col-md-6">
+                  <label for="validationDefault01" class="form-label">Nombres </label>
+                  <input type="text" class="form-control" id="nombre_per" >
+                </div>
+                <div class="col-md-6">
+                  <label for="validationDefault02" class="form-label">N_Documento</label>
+                  <input type="number" class="form-control" id="identificacion_per" >
+                </div>
+                <div class="col-md-6">
+                  <label for="validationDefaultUsername" class="form-label">Usuario</label>
+                  <input type="text" class="form-control" id="usuario" >
+                </div>
+                  <div class="col-md-6">
+                    <label for="validationDefaultUsername" class="form-label">Contraseña</label>
+                   <!--  <span  id="inputGroupPrepend2">Contraseña</span> -->
+                    <input type="password" class="form-control" id="contraseña" >
+                  </div>
+              
+              
+              </form>
+              <!-- fin from modal -->
+              
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              <button type="button" class="btn btn-warning" onclick="registrar_usuario()">Guardar</button>
+           
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
+     
+
+</div>
+
+
+<script src="/Enlaces/scrips/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+</body>
+
+
+<script>
+  
+ function registrar_usuario(){
+   
+   var identificacion_per = document.getElementById('identificacion_per').value;
+   var nombre_per= document.getElementById('nombre_per').value;
+   var usuario =document.getElementById('usuario').value;
+   var contraseña =document.getElementById('contraseña').value;
+  console.log(nombre_per);
+   const datos= new URLSearchParams();
+
+   
+   datos.append('identificacion_per',identificacion_per);
+   datos.append('nombre_per',nombre_per);
+   datos.append('usuario',usuario);
+   datos.append('contraseña',contraseña);
+
+   fetch('inicio/registrar_usuario',{
+     method: 'Post',
+     body:datos
+   })
+   .then(res=>res.text())
+   .then(data=>{
+
+     alert(data);
+
+
+     
+
+   });
+   
+}
+/* alerta de no usuario al validar */
+
+/* var usuario=document.getElementById('usuario');
+var contraseña= document.getElementById('contraseña');
+var error = document.getElementById('error');
+
+var form= document.getElementById('formulario');
+  form.addEventListener('submit',function(event){
+    event.preventDefault();
+    var mensajesError = [];
+ 
+    if(usuario.value===null ||usuario.value===''){
+      mensajesError.push('ingrese su usuario');
+    }
+
+    if(contraseña.value===null ||contraseña.value===''){
+      mensajesError.push('ingrese su contraseña');
+    }
+    error.innerHTML = mensajesError.join(', ');
+     
+
+  }) */
+
+</script>
+

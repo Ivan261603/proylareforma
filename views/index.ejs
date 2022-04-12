@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>RegistroNuevoMiembro</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- link de bootstrap -->
+    <link href="/Enlaces/links/bootstrap.min.css">
+     <!-- para buscador de select -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/css/bootstrap-select.min.css">
+    <!-- link css -->
+    <link rel="stylesheet" href="/css/index.css">
+    <!-- link icono de ventana -->
+    <link rel="shortcut icon" type="image/png" href="/img/icono.png">
+    
+    
+</head>
+<body>
+    <%- include ('barra_nav')%>
+<div class="container2">
+
+    <!-- inicio Modal -->
+    <!-- Button trigger modal -->
+   
+  <!-- Modal -->
+  <div class="modal fade" id="btnper" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel"> Buscar Persona</h5>
+          
+         <!--  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+         
+        </div>
+        <div class="input-group col md-6">
+          <input class="form-control" id="datos" type="number">
+          <span class="input-group-btn">
+           <button class="btn btn-info " type="button" onclick="Buscar_datos();" id="boton">Buscar
+              <span class="fa fa-eye-slash "></span>
+           </button>
+          </span>
+         
+          </div>
+        <div class="modal-body">
+          <!--  <button type="button" class="btn " onclick="listar_personas()"></button> -->
+          <table class="table table-hover" id="tabla">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">identificacion</th>
+                <th scope="col">Nombres</th>
+                <th scope="col">Dirección</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Tipo de Persona</th>
+                <th scope="col">Elegir</th>
+              </tr>
+            </thead>
+            <tbody id="tablas">
+              <tr>
+                <th ></th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>              
+            </tbody>
+          </table>
+         
+        </div>
+        <div class="modal-footer ">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+         <!--  <button type="button" class="btn btn-primary">Guardar</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- fin del modal-1 -->
+
+<!-- Modal -->
+
+
+<!-- inicio formulario -->
+<h4>Registro de Persona</h4>
+<div class="container ">
+        <div class="row">
+            <div class="col-md-12 p-3">
+              <form action="" id="form" method="post" enctype="multipart/form-data">
+                    <div class="col-md-4" id="contImag">
+                      <div class="card " id="previa">
+                        <img src="/img/perfil.png" id="foto">
+                        <div class="footer" >
+                                <input type="file" name="avatar" id="imgsub" style="display: none;">
+                                  
+                                <input type="button" value="Seleccionar Foto" class="btn btn-outline-warning"
+                                  onclick="document.getElementById('imgsub').click()">
+                                <!--   <button type="button" onclick="registrarImagen()" class="btn btn-warning">Enviar </button> -->
+                                
+                        </div>
+                      </div>
+                      
+                      </div>
+                      <div class="col-md-4">
+                        <label for="inputEmail4" class="form-label">Id_persona</label>
+                        <input type="text" class="form-control" id="id_persona" disabled>
+                        <input type="number" class="form-control" id="estado_p" value="1" hidden>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="inputEmail4" class="form-label">Nombres</label>
+                        <input type="text" class="form-control" id="nombre_p"placeholder=" &#128100 Nombres "  required/>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="inputEmail4" class="form-label">Fecha Nacimiento</label>
+                        <input type="date" class="form-control" id="fecha" >
+                      </div>
+                      <div class="col-md-6">
+                          <label for="inputState" class="form-label">Tipo de identificacion</label>
+                          <select id="tipo_identificacion" class="form-select" >
+                              <option selected>Selecionar...</option>
+                              <option value="Cédula de Cuidadania">Cédula de Cuidadania</option>
+                              <option>TEdentidad</option>
+                              <option>Pasaporte</option>
+                              <option>Otros</option>
+                          </select>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="inputPassword4" class="form-label">N°-Identificación</label>
+                        <input type="number" value="" class="form-control" id="identificacion_p" name='indentificacion_p' required>
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label ">Departamento</label>
+                        <select type="text" id="departamento"data-style="btn btn-outline-secondary"   data-live-search="true" class="form-control selectpicker " >
+                          
+                        </select>
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label">Municipio</label>
+                        <select type="text" id="municipio"data-style="btn btn-outline-secondary"   data-live-search="true" class="form-control selectpicker " >
+                          
+                        </select>
+                      </div>
+                  
+                      <div class="col-md-6">
+                        <label for="inputAddress" class="form-label">Dirección</label>
+                        <input type="text" class="form-control" id="direccion" placeholder=" &#8962 Dirección" >
+                      </div>
+                        <div class="col-md-6">
+                          <label for="inputAddress2" class="form-label">Telefono/Celular</label>
+                          <input type="text" class="form-control" id="telefono" placeholder=" &#128222 Fijo/Celular" >
+                        </div>
+                      <div class="col-md-6">
+                          <label for="inputState" class="form-label">Tipo de Persona</label>
+                          <select id="rol_per" class="form-select" >
+                              <option selected>Selecionar...</option>
+                              <option>Miembro</option>
+                              <option>Visitante</option>
+                              <option>Invitado</option>
+                              
+                          </select>
+                      </div>
+                      <div class="col-md-2">
+                        <label for="inputState" class="form-label">Bautizado</label></br>
+                        <input type="radio" id="" class="form-check-input" name=data_bautizado value="Si">
+                      
+                        <label for="bautizado">Si</label><br>
+                        <input type="radio" id="" class="form-check-input " name="data_bautizado" checked='true'  value="No">
+                        <label for="bautizado">No</label><br>
+
+                      </div>
+                      
+                      <div class="col-md-2">
+                        <label for="inputState" class="form-label">Discipulado</label></br>
+                        <input type="radio" id="" class="form-check-input "   name= "data_disipulado"  value="Si">
+                        <label for="disipulado">Si</label><br>
+                        <input type="radio" id="" class="form-check-input " name= "data_disipulado" checked='true'  value="No">
+                        <label for="disipulado">No</label>
+                    
+                      </div>
+                  
+               
+                      
+
+                      
+
+                  
+              </form>
+          
+             
+            </div>  
+          
+             <!--   -->
+            <div class="container1">
+              <div class="row">
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4">
+                      <div class=" d-grid" >
+                          <button type="submit"id="btn-nuevo" class="btn btn-light btn-lg "onclick="registrarPersona()" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            Crear Nuevo
+                          </button>
+                      </div>
+
+                  </div>
+             
+              </div>
+            </div>
+            
+           
+      </div>  
+</div>
+     
+
+</div>
+        
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="crossorigin="anonymous"></script>
+<!-- para buscador del select-->  
+    <!-- Latest compiled and minified JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/js/bootstrap-select.min.js"></script>
+
+<!-- (Optional) Latest compiled and minified JavaScript translation files -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/js/i18n/defaults-*.min.js"></script>
+    <script src="/js/script_cumple.js"></script>
+</body>
+
+</html>
+
+<script>
+ 
+
+  listar_municipio();
+ listar_departamento();
+
+//funcion de registrar Persona
+function registrarPersona () {
+  var estado_p= document.getElementById('estado_p').value;
+  var nombre_p= document.getElementById('nombre_p').value;
+  var tipo_identificacion = document.getElementById('tipo_identificacion').value;
+  var fecha= document.getElementById('fecha').value;
+  var identificacion_p = document.getElementById('identificacion_p').value;
+  var departamento =document.getElementById('departamento').value;
+  var municipio =document.getElementById('municipio').value;
+  var direccion =document.getElementById('direccion').value;
+  var telefono =document.getElementById('telefono').value;
+  var rol_per =document.getElementById('rol_per').value;
+  var discipulado=document.querySelector("input[name='data_disipulado']:checked").value;
+  var bautizado=document.querySelector("input[name='data_bautizado']:checked").value;
+  var imgsub=document.getElementById('imgsub').value;
+  var form = document.getElementById("form");
+
+  var formData = new FormData(form);
+      
+        if(nombre_p==''){
+           alert('El campo de nombre es obligatorio')
+           document.getElementById('nombre_p').focus();
+           return false;
+        }
+        if(fecha==''){
+           alert('El campo de fecha es obligatorio')
+           document.getElementById('fecha').focus();
+           return false;
+        }
+        if(imgsub==''){
+            imgsub.value='icono.png';
+           //alert('El campo de foto es obligatorio')
+           //document.getElementById('imgsub').focus();
+           //return true;
+        }
+        if(identificacion_p==''){
+           alert('El campo de identificacion_p es obligatorio')
+           document.getElementById('identificacion_p').focus();
+           return false;
+        }
+        if(direccion==''){
+           alert ('El campo de dirección es obligatorio')
+           document.getElementById('direccion').focus();
+           return false;
+        }
+        if(identificacion_p==''){
+           alert('El campo de identificacion_p es obligatorio')
+           return false;
+        }
+        if(discipulado.checked==false){
+           alert('El campo de discipulado es obligatorio')
+           return false;
+        }
+      /*   if(bautizado==''){
+           alert('El campo de bautizado es obligatorio')
+           return false;
+        } */
+     /*    if(fechahoy.substring(4)===fecha.substring(4)){
+           alert('Felicidades en tu dia ');
+          document.getElementById('alert').innerHTML
+          }
+          else{
+              alert('fecha errada');
+          } */
+          
+      formData.append('estado_p',estado_p);    
+      formData.append('nombre_p',nombre_p);
+      formData.append('tipo_identificacion',tipo_identificacion);
+      formData.append('fecha',fecha);
+      formData.append('identificacion_p',identificacion_p);
+      formData.append('departamento',departamento);
+      formData.append('municipio',municipio);
+      formData.append('direccion',direccion);
+      formData.append('telefono',telefono);
+      formData.append('rol_per',rol_per);
+      formData.append('discipulado',discipulado);
+      formData.append('bautizado',bautizado);
+      formData.append('imgsub',imgsub);
+
+  fetch('/Registros/subirImage',{
+    method: 'POST',
+    body: formData
+  })
+      
+      .then(res=>res.text())
+      .then(data=>{
+
+        //validar si hay error o no///??====
+       // var IsValidStatus = data.status;
+        var IsValid = JSON.parse(data);
+        //si  o si presento un error---- no se sabe cual 
+        if(IsValid.status == 500){
+          //detectamos el error
+          if(IsValid.code == 1062){
+            ///dato duplicado en la base de datos ---
+            alert(IsValid.mensaje);
+            return false;
+          }
+        }
+        else{
+        
+        
+      /*   return false;
+        if(IsValidStatus == 500){
+          //tenemos en cuenta el tipo de error...
+          if(data.code == 1062){
+            alert('identificacion del cliente ya se encuentra registrada');
+          }
+         
+          return false;
+        } */
+      
+  
+        alert(IsValid.mensaje);
+        document.getElementById('nombre_p').value = '';
+        document.getElementById('fecha').value ='';
+        document.getElementById('tipo_identificacion').value='';
+        document.getElementById('identificacion_p').value ='';
+        document.getElementById('departamento').value='';
+        document.getElementById('municipio').value='';
+        document.getElementById('direccion').value ='';
+        document.getElementById('telefono').value ='';
+        document.getElementById('rol_per').value = '';
+        document.getElementById('previa').value = '';
+        //document.getElementById('discipulado').value='';
+        //document.getElementById('bautizado').value='';
+        document.getElementById('imgsub').value='';
+
+        console.log(form);
+        listar_personas();
+        //window.location="http://localhost:4000/Registros";
+        window.location="http://localhost:4000/ListarPersona";
+
+      }
+
+      });
+  
+
+    
+}
+//select depart
+$(document).ready(function(){
+   $('#departamento').selectpicker();
+  }); 
+//
+function listar_departamento(){
+      fetch('/Registros/listar_departamento',{
+        method:'get'
+
+    })
+    .then(resp=>resp.json())
+    .then(data=>{
+   
+    
+      var html='<option value =seleccionar>Seleccionar </option>';
+      
+      for (var i in data){
+           html+= `<option value =${data[i].id_departamento}>${data[i].departamento} </option>`;
+      }
+    
+      document.getElementById("departamento").innerHTML=html;
+      $('.selectpicker').selectpicker('refresh');
+    })
+    }
+  //select municipio
+    $(document).ready(function(){
+       $('#municipio').selectpicker();
+     }); 
+   //
+    function listar_municipio(){
+      fetch('/Registros/listar_municipio',{
+        method:'get'
+
+    })
+    .then(resp=>resp.json())
+    .then(data=>{
+
+      var html='<option value =seleccionar>Seleccionar </option>';
+      for (var i in data){
+          html+=`<option value =${data[i].id_municipio}>${data[i].municipio} </option>`;
+        }
+        document.getElementById("municipio").innerHTML=html;
+        $('.selectpicker').selectpicker('refresh');
+        
+
+
+    })
+    }
+
+
+   
+
+
+
+  
+  
+    function listar_personas(){
+      
+      fetch('/Registros/listar_personas',{
+        method:'get'
+
+    })
+    .then(resp=>resp.json())
+    .then(data=>{
+     /*  $(document).ready( function () {
+            $('#tabla').DataTable( {
+         language: {
+          search: "Bucar:"},
+          
+          
+    });
+} ); */
+         
+
+      var html='';
+      for (var i in data){
+            html+=`<tr><td>${data[i].id_persona}</td>
+              <td>${data[i].identificacion_p}</td>
+              <td>${data[i].nombre_p}</td>
+              <td>${data[i].fecha}</td>
+              <td>${data[i].direccion}</td>
+              <td>${data[i].telefono}</td>
+              <td>${data[i].rol_per}</td>
+              <td> 
+                    <a href ='javascript:Buscar_persona(${data[i].id_persona})'>Seleccionar</a>
+                
+              </td>
+              </tr>`;
+        }
+        document.getElementById("tabla").innerHTML=html;
+       /*  document.getElementById("msg").innerHTML="<div class='alert alert-primary'role='alert'>Se listo la Noticia </div>"; */
+      
+    });
+    }
+    listar_personas();
+/* function Buscar_datos(){
+
+var id = document.getElementById('datos').value;
+
+const datos = new URLSearchParams();
+datos.append('datos', id);
+
+fetch('/Registros/Buscar_datos',{
+method: 'post',
+body: datos
+})
+.then(resp=>resp.json())
+.then(data=>{
+    console.log(datos)
+    var html = '';
+
+    for(var i in data){
+        html+=`<tr>
+                    <td>${data[i].id_persona}</td>              
+                    <td>${data[i].identificacion_p}</td>
+                    <td>${data[i].nombre_p}</td>
+                    <td>${data[i].direccion}</td>
+                    <td>${data[i].telefono}</td>
+                    <td>${data[i].rol_per}</td>
+                   <td> <a href ='javascript:Buscar_persona(${data[i].id_persona})'>Seleccionar</a></td>
+     
+                    </td>
+                <td>`
+    }
+    document.getElementById('tabla').innerHTML=html;
+})
+
+
+
+
+} */
+ 
+var fechaactual= new Date();
+    fecha =new Date();
+    console.log(fechaactual.toString());
+    
+    var dia =fechaactual.getDate();
+    var mes = fechaactual.getMonth()+1;
+    if(mes <10){
+        mes2 = '0'+ mes;
+    }
+    if(dia <10){
+        dia = '0'+ dia;
+    console.log(dia);
+    }
+    
+    var año =fechaactual.getFullYear();
+    var fechahoy =año+ '-' + mes+'-'+ dia;
+
+//FUNCUIONDE res DE LA PERSONA
+
+/*  function registrar_persona(){
+     
+      var nombre_p= document.getElementById('nombre_p').value;
+      var fecha= document.getElementById('fecha').value;
+      var identificacion_p = document.getElementById('identificacion_p').value;
+      var departamento =document.getElementById('departamento').value;
+      var municipio =document.getElementById('municipio').value;
+      var direccion =document.getElementById('direccion').value;
+      var telefono =document.getElementById('telefono').value;
+      var rol_per =document.getElementById('rol_per').value;
+      var discipulado=document.getElementById('discipulado').value;
+      var bautizado=document.getElementById('bautizado').value;
+      var imgsub=document.getElementById('imgsub').value;
+      //var imgsub = document.querySelector('input[type="file"]');
+
+
+      const datos= new URLSearchParams();
+
+      if(nombre_p==''){
+           alert('El campo de nombre es obligatorio')
+           document.getElementById('nombre_p').focus();
+           return false;
+        }
+        if(fecha==''){
+           alert('El campo de fecha es obligatorio')
+           document.getElementById('fecha').focus();
+           return false;
+        }
+        if(identificacion_p==''){
+           alert('El campo de identificacion_p es obligatorio')
+           document.getElementById('identificacion_p').focus();
+           return false;
+        }
+        if(direccion==''){
+           alert ('El campo de dirección es obligatorio')
+           document.getElementById('direccion').focus();
+           return false;
+        }
+        if(identificacion_p==''){
+           alert('El campo de identificacion_p es obligatorio')
+           return false;
+        }
+        if(discipulado==''){
+           alert('El campo de discipulado es obligatorio')
+           return false;
+        }
+        if(bautizado==''){
+           alert('El campo de bautizado es obligatorio')
+           return false;
+        }
+        if(fechahoy.substring(4)===fecha.substring(4)){
+           alert('Felicidades en tu dia ');
+          document.getElementById('alert').innerHTML
+          }
+          else{
+              alert('fecha errada');
+          }
+          
+
+     
+
+      datos.append('nombre_p',nombre_p);
+      datos.append('fecha',fecha);
+      datos.append('identificacion_p',identificacion_p);
+      datos.append('departamento',departamento);
+      datos.append('municipio',municipio);
+      datos.append('direccion',direccion);
+      datos.append('telefono',telefono);
+      datos.append('rol_per',rol_per);
+      datos.append('discipulado',discipulado);
+      datos.append('bautizado',bautizado);
+      datos.append('imgsub',imgsub);
+   
+
+      fetch('Registros/registrar_persona',{
+        method: 'Post',
+        body:datos
+      })
+      .then(res=>res.text())
+      .then(data=>{
+
+     
+
+       
+        alert(data);
+        document.getElementById('nombre_p').value = '';
+        document.getElementById('fecha').value ='';
+        document.getElementById('identificacion_p').value ='';
+        document.getElementById('direccion').value ='';
+        document.getElementById('telefono').value ='';
+        document.getElementById('rol_per').value = '';
+        document.getElementById('previa').value = '';
+        document.getElementById('discipulado').value='';
+        document.getElementById('bautizado').value='';
+
+        registrarImagen ();
+        listar_personas();
+        window.location="http://localhost:4000/ListarPersona";
+
+        
+
+      });
+      
+ } */
+
+ 
+
+ 
+
+function Buscar_persona(id){
+    
+    const datos= new URLSearchParams();
+    datos.append('id_persona',id);
+
+    fetch('/Registros/Buscar_persona',{
+      method:'post',
+      body:datos
+    })
+  .then(resp=>resp.json())
+  .then(data=>{
+   
+    for (var i in data)
+       {
+          document.getElementById("id_persona").value=data[i].id_persona;
+          document.getElementById("identificacion").value=data[i].identificacion_p;
+          document.getElementById("nombre_p").value=data[i].nombre_p;
+          document.getElementById("direccion").value=data[i].direccion;
+          document.getElementById("telefono").value=data[i].telefono;
+          document.getElementById("rol_per").value=data[i].rol_per;
+        
+      }
+  });
+}
+
+  
+
+</script>

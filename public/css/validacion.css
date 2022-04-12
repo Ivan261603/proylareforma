@@ -1,0 +1,36 @@
+body{
+    background:#ffffE0 ;
+    background: linear-gradient(to right, #ffefd5,#ffffE0);
+
+}
+
+
+h3{
+    font-family: cursive;
+    text-align: center;
+}
+/* label de validar */
+label{
+    font-family: cursive;
+}
+h5{
+    color: white;
+    font-family: cursive;
+}
+a{
+    color: black;
+    text-decoration: none;
+    font-family: cursive;
+}
+
+
+.bg{
+    background-image: url(../img/fondo.jpg);
+    background-position: center center;
+    background-repeat:no-repeat ;
+}
+/* boton de inicio */
+#ini{
+    color: white;
+    font-family: cursive;
+}

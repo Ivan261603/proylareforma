@@ -1,0 +1,250 @@
+<head>
+    <title>Inicio</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- link de bootstrap -->
+    <link href="/Enlaces/links/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <!-- link icono de ventanaLogo -->
+    <link rel="shortcut icon" type="image/png" href="/img/icono.png">
+       <!-- link css -->
+    <link rel="stylesheet" href="/css/inivali.css">
+</head>
+
+<body>
+    <%- include ('barra_nav')%>
+
+    <h3 class="h3">Bienvenido a la Reforma  </h3>
+   
+      <!-- <iframe src="" class="marco" frameborder="0"></iframe> -->
+      
+    
+        <div class="container" >
+           
+          <div class="row">
+                  <div class="col-md-8 test-center">
+                    
+                    <table id="tabla" class="table table-striped table-hover">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Pide Oración</th>
+                            <th scope="col">Motivo de Oración</th>
+                            <th scope="col">Admin</th>
+                          </tr>
+                        </thead>
+                        <tbody  id="tablas">
+                         
+                        </tbody>
+                      </table>
+        
+                </div>
+                    <div  class="col-md-4">
+                          <h4>Registrar Petición</h4>
+                          <div class="mb-3">
+                            <label>id_Petición</label>
+                            <input type="text" class="form-control" id="id_peticion" disabled>
+                          </div>
+                          <div class="mb-3">
+                              <label>Quien Pide Oración</label>
+                              <input type="text" class="form-control" id="titulo" placeholder="Digite el Nombre">
+                          </div>
+                          <div class="mb-3">
+                              <label>Motivos de Oración</label>
+                              <textarea  class="form-control" id="motivo" rows="3" placeholder="Digite Motivos"></textarea>
+                          </div>
+        
+                          <div  class="mb-3">
+                              <button type="button" class="btn btn-warning btn-lg " onclick="registrar_peticion()">Registrar</button>
+                              <button type="button" class="btn btn-warning btn-lg " onclick="actualizar_peticion()">Actualizar</button>
+                          </div>
+                        
+                          <footer>
+                            <button class="btn btn-warning btn-lg buscaVers">
+                              <a href="https://www.biblia.es/biblia-online.php" class='buscaVers' target="black">Ir a buscar un versiculo</a>
+                        
+                            </button>
+                          </footer>
+                    
+        
+                    
+                     </div>
+            </div>
+        
+            
+                    
+        </div>  
+            
+        
+    
+   
+    
+    
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- <script src="/js/alert.js"></script> -->
+   
+    <script src="/js/script_cumple.js"></script>
+</body>
+
+<!-- otro tipo de alert -->
+<!-- <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script> -->
+
+<script>
+    listar_peticion();
+     function listar_peticion(){
+      fetch('/inicioBienvenida/listar_peticion',{
+        method:'get'
+
+    })
+    .then(resp=>resp.json())
+    .then(data=>{
+      var html='';
+      for (var i in data)
+          {
+        html+=`<tr><td>${data[i].id_Peticion}</td>
+          <td>${data[i].titulo}</td>
+          <td>${data[i].motivo}</td>
+          <td>  
+            <a href ='javascript:seleccionar_peticion(${data[i].id_Peticion})'>Seleccionar</a>
+            <a href ='javascript:Eliminar_peticion(${data[i].id_Peticion})'>Eliminar</a>
+                
+            
+          </td>
+          
+          </tr>`;
+          
+        }
+        document.getElementById("tablas").innerHTML=html;
+        //document.getElementById("msg").innerHTML="<div class='alert alert-primary'role='alert'>Se listo la Noticia </div>";
+        
+      
+
+
+
+    });
+    }
+
+    function seleccionar_peticion(id_Peticion){
+    
+      const datos= new URLSearchParams();
+      datos.append('id_Peticion',id_Peticion);
+
+      fetch('/inicioBienvenida/seleccionar_peticion',{
+        method:'post',
+        body:datos
+
+    })
+    .then(resp=>resp.json())
+    .then(data=>{
+     
+      for (var i in data)
+          {
+            document.getElementById("id_peticion").value=data[i].id_Peticion;
+            document.getElementById("titulo").value=data[i].titulo;
+            document.getElementById("motivo").value=data[i].motivo;
+          
+        }
+       
+        //document.getElementById("msg").innerHTML="<div class='alert alert-warning'role='alert'>Se Realiza la busqueda</div>";
+        
+      
+
+      
+
+    });
+
+
+    }
+    function actualizar_peticion(){
+      var id_peticion= document.getElementById('id_peticion').value;
+      var titulo= document.getElementById('titulo').value;
+      var motivo= document.getElementById('motivo').value;
+     
+      const datos= new URLSearchParams();
+
+      datos.append('id_peticion',id_peticion);
+      datos.append('titulo',titulo);
+      datos.append('motivo',motivo);
+
+
+
+    fetch('/inicioBienvenida/Actualizar',{
+        method:'PUT',
+        body:datos
+    })
+    .then(res=>res.text())
+    .then(data=>{
+                
+          alert(data);     
+               
+    });
+    listar_peticion();
+    //document.getElementById('msg').innerHTML="<div class='alert alert-info'role='alert'>Se actualiza la noticia</div>";
+    }
+
+    function registrar_peticion(){
+        
+        var id_peticion=document.getElementById('id_peticion').value;
+        var titulo=document.getElementById('titulo').value;
+        var motivo=document.getElementById('motivo').value;
+    
+        const datos= new URLSearchParams();
+
+        datos.append('id_peticion',id_peticion);
+        datos.append('titulo',titulo);
+        datos.append('motivo',motivo);
+
+        fetch('/inicioBienvenida/registrar_peticion',{
+            method:'post',
+            body:datos
+        })
+        .then(res=>res.text())
+        .then(data=>{
+
+            alert(data);
+
+             titulo=document.getElementById('titulo').value='';
+             motivo=document.getElementById('motivo').value='';
+    
+           
+            listar_peticion();
+
+        });
+       
+    }
+
+    function Eliminar_peticion(id_Peticion){
+      const datos= new URLSearchParams();
+
+      datos.append('id_Peticion',id_Peticion);
+      
+      fetch('/inicioBienvenida/Eliminar',{
+        method:'delete',
+        body:datos
+      })
+        .then(resp=>resp.text())
+        .then(data=>{
+                
+          alert(data);  
+          listar_peticion();  
+          
+    });
+    
+    }
+
+
+ 
+ 
+/*     if(fechahoy.substring(4)===fecha.substring(4)){
+           alert(nombre_p);
+          document.getElementById('alert').innerHTML=" <div class='alert alert-info' role='alert' >hoy es el cumpleaños de  </div>";
+          }
+          else{
+              alert('fecha errada');
+          } */
+
+
+
+    
+</script>
