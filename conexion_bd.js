@@ -3,7 +3,7 @@ var conexion=mysql.createConnection({
     //base de datos local
     host :  "localhost",
     user :  "root",
-    password: "123123",
+    password: "",
     database:  "proyecto_adsi"
 
     //base de datos remora
