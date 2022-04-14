@@ -546,6 +546,10 @@ function totalesf (){
       currency: 'COP',
       minimumFractionDigits: 0
     })
+
+    if(gastotal>acutotal){
+      document.getElementById('tota').style='color:red';
+    }
  
 
  var TotalF = parseFloat( acutotal) - parseFloat( gastotal);
