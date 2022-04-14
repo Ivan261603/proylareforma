@@ -1,0 +1,572 @@
+<head>
+  <title>Reportes</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- nuevos link -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+   <!-- link css -->
+   <link rel="stylesheet" href="/css/reportes.css">
+
+  <!-- estilo css de datatable -->
+      <link rel="stylesheet" href="https://cdn.datatables.net/1.11.0/css/jquery.dataTables.min.css">
+      <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.0.0/css/buttons.dataTables.min.css">
+  
+      <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.0.0/js/buttons.print.min.js">
+      <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.0.0/js/buttons.print.min.js">
+  
+  <!-- link de bootstrap -->
+ <!--  <link href="/Enlaces/links/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous"> -->
+  <!-- link de script -->
+  
+   <!-- link de icono ventana -->
+   <link rel="shortcut icon" type="image/png" href="/img/icono.png">
+     
+  
+  <!--font awesome con CDN-->  
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">  
+</head>
+
+<body  >
+
+  <%- include ('barra_nav')%>
+
+  
+  
+  <div class="container">
+  
+          <div  class="col-lg-12 p-2" >
+              <div id="tabla1" >
+            <!-- este div es para el buscador de rango de fechas -->
+           <!--        <div class="containerF">
+                      <div class="row">
+                          <div class="col-md-4" >
+                                <div class="col-md-12">
+                                  <label for="" class="form-label">Desde</label>
+                                  <input type="date" class="form-control" id="desde">  
+                                </div>
+                                                          
+                          </div>
+                          <div class="col-md-4">
+                                <div class="col-md-12">
+                                  <label for="" class="form-label">Hasta</label>
+                                  <input type="date" class="form-control"id="hasta"> 
+                                </div>
+                            
+                          </div>
+              
+                          <div class="col-md-4 p-4">
+                                <div class="col-md-4">
+                                  <label for="" class="form-label"></label>
+                                  <input type="button" class="form-control btn btn-info" onclick="BuscarRango();" value="Buscar">
+                                </div>
+                            
+                          </div>
+                          
+                      </div>
+                     
+                </div> -->
+                <h5>Ingresos</h5>
+                  <table class="table table-hover "id="tabla" >
+                    
+                      <thead >
+                       <!-- boton paara export tabla -->
+                    <!--   <button id="excel" onclick="exportTableToExcel('tabla')" title="Exportar a Excel">
+                        <img class="excel" src="/img/excel.png" alt="" >
+                      </button> -->
+                        <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">Persona</th>
+                              <th scope="col">Identificación</th>
+                              <th scope="col">Ofrenda</th>
+                              <th scope="col">Diezmo</th>
+                              <th scope="col">Primicia</th>
+                              <th scope="col">Otros</th>
+                              <th scope="col">Fecha</th>
+                              <th scope="col">Total Ingreso </th>
+                            
+                        </tr>
+                      </thead>
+                      <tbody id="tablas">
+                        <tr>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          
+                        </tr>
+                        
+                      </tbody>
+
+                      <tfoot >
+                        <tr>
+                          
+                          <th  id="ttt" colspan="9">
+                              
+
+                            
+                            
+                          </th>
+                        </tr>
+                       
+                        
+
+                      </tfoot>
+                     
+            
+                    </table>
+                    
+              </div>
+          </div>
+
+          <div class="contenedor">
+            <div class="col-md-8">
+              <span  >
+                <img src="/img/caja-registradora.png" alt="caja" style="width: 100;">
+              </span>
+              <span id="tota"></span>
+              
+              
+            </div>
+          </div>
+
+              
+                <!-- tabla de egresos -->
+             
+              <div class="col-md-12 p-2 " >
+                
+                  <div id="tabla2E" class="col-md-12">
+                        <h5>Egresos</h5>
+                      <table id="tablaE" class="table table-hover" >
+                         <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Tipo de Gasto</th>
+                            <th scope="col">Concepto</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Total Gasto</th>
+                          </tr>
+                         </thead>
+                         
+                         <tbody id="tablas2">
+                           <tr>
+                             <td></td>
+                             <td></td>
+                             <td></td>
+                             <td></td>
+                             <td></td>
+                             
+                             
+                           </tr>
+
+                         </tbody>
+                         <tfoot>
+                            <tr>
+                              <th id="totEgre" colspan="5"></th>
+                            </tr>
+                          </tfoot>
+                          
+                        </table>
+                        
+                        
+                  </div>
+              </div> 
+           
+          
+        </div>
+      </div>
+      
+  </div>
+
+  
+
+  
+  
+
+  
+
+  <!-- <script src="/Enlaces/bootstrap/js/bootstrap.min.js"></script> -->
+ <!--  <script src="/Enlaces/scrips/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+-->   
+
+<!-- scrit de boostrap -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+
+  
+<!-- para los estilos de la tabla -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.0/js/dataTables.bootstrap5.min.js"></script>
+
+  <!-- para los botones -->
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.0.0/js/dataTables.buttons.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.0.0/js/buttons.html5.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.0.0/js/buttons.print.min.js"></script>
+ 
+   <!-- funcion para sumar  -->
+ <script src="https://cdn.datatables.net/plug-ins/1.11.5/api/sum().js"></script> 
+</body>
+
+<!-- codigo propio -->
+<!--  <script src="/js/script_cumple.js"></script> -->
+<script>
+var acutotal = 0;
+var gastotal = 0;
+
+
+console.log()
+/* funcion listar ingresos */
+listar_ingreso();
+ function listar_ingreso(){
+
+  const formatterPeso = new Intl.NumberFormat('es-CO', {
+    style: 'currency',
+    currency: 'COP',
+    minimumFractionDigits: 0
+  })
+   
+   
+    fetch('/Reportes/listar_ingreso',{
+      method:'get'
+
+  })
+  .then(resp=>resp.json())
+  .then(data=>{
+    $(document).ready(function() {
+       var tabla= $('#tabla').DataTable( {
+         "createdRow":function(row,data,index){
+
+          
+          if(row[8]==0){
+            $('td',row).eq(8).css({
+              'background-color': '#ff5252',
+              'color': 'white',
+            });
+          }
+
+         },
+     /*     "drawCallback":function(){
+            //alert("se esta dibujando");
+            var api = this.api();
+            $(api.column(5).footer()).html(
+              'Total: $' +api.column(5).data().sum()
+              
+            )
+         }, */
+          language: {
+              "lengthMenu": "Mostrar _MENU_ registros",
+              "zeroRecords": "No se encontraron resultados",
+              "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+              "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+              "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+              "sSearch": "Buscar:",
+              "oPaginate": {
+                  "sFirst": "Primero",
+                  "sLast":"Último",
+                  "sNext":"Siguiente",
+                  "sPrevious": "Anterior"
+         },
+         "sProcessing":"Procesando...",
+               
+               
+          },
+   
+          
+            dom: 'Bfrtip',
+               buttons: [{
+                extend:    'excelHtml5',
+                text:      '<i class="fas fa-file-excel"></i> ',
+                titleAttr: 'Exportar a Excel',
+                className: 'green',
+               },
+              {
+                extend:    'pdfHtml5',
+                text:      '<i class="fas fa-file-pdf"></i> ',
+                titleAttr: 'Exportar a PDF',
+                className: 'red'
+              },
+              {
+                  extend:    'print',
+                  text:      '<i class="fa fa-print"></i> ',
+                  titleAttr: 'Imprimir',
+                  className: 'black'
+                },    
+                   ]
+
+                   
+  } );
+  
+  
+    
+} );
+
+   
+          acutotal = 0;
+          var html='';      
+          for (var i in data){
+            
+            acutotal += parseFloat( data[i].total_ingreso)
+            html+=`<tr><td>${data[i].idingresos}</td>
+            <td>${data[i].nombre_p}</td>
+            <td>${data[i].identificacion_p}</td>
+            <td>${data[i].ofrenda}</td>
+            <td>${data[i].diezmo}</td>
+            <td>${data[i].primicia}</td>
+            <td>${data[i].otros}</td>
+            <td>${data[i].dates}</td>
+            <td>${formatterPeso.format(data[i].total_ingreso)}</td>
+
+             
+            
+            
+            </tr>`;
+           
+      }
+      console.log(acutotal);
+      totalesf();
+    
+     
+      document.getElementById("tablas").innerHTML = html;
+
+     
+    
+    
+  });
+ 
+  
+  
+  }
+/* funcion mostrar totales de ingresos */
+  listarTotal();
+function listarTotal(){
+  
+  var totales=
+    fetch('/Reportes/listar_total',{
+      method:'get'
+
+  })
+  .then(resp=>resp.json())
+  .then(data=>{
+   
+    var html='';
+            
+    for (var i in data){
+          html+=`<tr>
+            <td>${data[i].totales}</td>
+          
+            <td> 
+            
+              
+            </td>
+            </tr>`;
+      }
+      
+     /* document.write(html); */
+      document.getElementById("ttt").innerHTML= 'Totales: $'+html ;
+     console.log(data);
+    
+  });
+  }
+
+  /* listar egresos */
+
+  listar_egreso();
+ function listar_egreso(){
+
+  const formatterPeso = new Intl.NumberFormat('es-CO', {
+    style: 'currency',
+    currency: 'COP',
+    minimumFractionDigits: 0
+  })
+
+    fetch('/Reportes/listar_egreso',{
+      method:'get'
+
+  })
+  .then(resp=>resp.json())
+  .then(data=>{
+    $(document).ready(function() {
+        $('#tablaE').DataTable( {
+        
+   
+          language: {
+              "lengthMenu": "Mostrar _MENU_ registros",
+              "zeroRecords": "No se encontraron resultados",
+              "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+              "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+              "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+              "sSearch": "Buscar:",
+              "oPaginate": {
+                  "sFirst": "Primero",
+                  "sLast":"Último",
+                  "sNext":"Siguiente",
+                  "sPrevious": "Anterior"
+         },
+         "sProcessing":"Procesando...",
+               
+               
+          },
+          
+            dom: 'Bfrtip',
+               buttons: [{
+                extend:    'excelHtml5',
+                text:      '<i class="fas fa-file-excel"></i> ',
+                titleAttr: 'Exportar a Excel',
+                className: 'green',
+                
+                
+               },
+              {
+                extend:    'pdfHtml5',
+                text:      '<i class="fas fa-file-pdf"></i> ',
+                titleAttr: 'Exportar a PDF',
+                className: 'red'
+              },
+              {
+                  extend:    'print',
+                  text:      '<i class="fa fa-print"></i> ',
+                  titleAttr: 'Imprimir',
+                  className: 'black'
+                },    
+                   ]
+  } );
+} );
+
+ 
+     gastotal = 0;
+    var html='';
+    for (var i in data){
+      gastotal += parseFloat( data[i].valor_gasto)
+
+          html+=`<tr><td>${data[i].idegresos}</td>
+            <td>${data[i].tipo}</td>
+            <td>${data[i].concepto}</td>
+            <td>${data[i].dates}</td>
+            <td>${formatterPeso.format(data[i].valor_gasto)}</td>
+            
+            
+            </tr>`;
+      }
+      console.log(gastotal);
+      totalesf ();
+     
+      document.getElementById("tablas2").innerHTML = html;
+     
+    
+  });
+  }
+
+//funcion que lista los totales de egresos  
+listarTotalE();
+function listarTotalE(){
+  
+  var valor_gasto=
+    fetch('/Reportes/listar_totalE',{
+      method:'get'
+
+  })
+  .then(resp=>resp.json())
+  .then(data=>{
+   
+    var html='';
+            
+    for (var i in data){
+          html+=`<tr>
+            <td>${data[i].valor_gasto}</td>
+          
+            <td> 
+            
+              
+            </td>
+            </tr>`;
+      }
+      
+     /* document.write(html); */
+      document.getElementById("totEgre").innerHTML= 'Totales: $'+html ;
+     /*  document.getElementById("msg").innerHTML="<div class='alert alert-primary'role='alert'>Se listo la Noticia </div>"; */
+    
+  });
+  }
+/* Buscar Rango de fechas */
+
+function BuscarRango(){
+
+var desde = document.getElementById('desde').value;
+var hasta = document.getElementById('hasta').value;
+
+const datos = new URLSearchParams();
+datos.append('desde', desde);
+datos.append('hasta', hasta);
+
+fetch('/Reportes/buscar_rango',{
+method: 'post',
+body: datos
+})
+.then(resp=>resp.json())
+.then(data=>{
+  
+  var html = '';
+
+  for(var i in data){
+      html+=`<tr>
+                  <td>${data[i].idingresos}</td>
+                  <td>${data[i].nombre_p}</td>
+                  <td>${data[i].identificacion_p}</td>       
+                  <td>${data[i].ofrenda}</td>
+                  <td>${data[i].diezmo}</td>
+                  <td>${data[i].primicia}</td>
+                  <td>${data[i].otros}</td>
+                  <td>${data[i].dates}</td>
+                  <td>${data[i].total_ingreso}</td>
+                
+   
+                  </td>
+              <td>`
+  }
+  document.getElementById('tablas').innerHTML=html;
+})
+
+
+}
+
+  
+function totalesf (){
+const formatterPeso = new Intl.NumberFormat('es-CO', {
+    style: 'currency',
+    currency: 'COP',
+    minimumFractionDigits: 0
+  })
+
+  if(gastotal>acutotal){
+    document.getElementById('tota').style='color:red';
+  }
+
+
+var TotalF = parseFloat( acutotal) - parseFloat( gastotal);
+console.log(acutotal);
+console.log(gastotal);
+
+
+document.getElementById('tota').innerHTML ='Total Menos Gastos '+formatterPeso.format(TotalF) ; 
+//$('#tota').val(hhh);
+
+
+
+
+
+}
+
+
+//holas
+   
+</script>
