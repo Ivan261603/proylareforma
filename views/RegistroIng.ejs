@@ -314,7 +314,17 @@ input.value = input.value.replace(/[^\d\.]*/g,'');
       primicia=primicia.replace('.','');
       otros=otros.replace('.','');
       
-     
+     if(id_persona==''){
+      alert('El campo Nombre Persona es obligatorio')
+           document.getElementById('id_persona').focus();
+           return false;
+     }
+     if(total==''||total==0){
+      alert('El campo Ofrenda o Diezmo debe ser Mayor a Cero debes ingresar un valor')
+           document.getElementById('total').focus();
+           return false;
+     }
+  
 
       const datos=new URLSearchParams();
 
