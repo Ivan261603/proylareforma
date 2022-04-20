@@ -172,6 +172,7 @@ Ocultar();
             document.getElementById('total').value='';
 
         });
+        listar_egreso();
        
     }
 /* funcion para agregar puntuación a los valores */
@@ -208,6 +209,7 @@ Ocultar();
       document.getElementById('fecha').value = ano + '-' + mes + '-' + dia;
     }
  //listar historial de gastos 
+ listar_egreso();
  function listar_egreso(){
 
 const formatterPeso = new Intl.NumberFormat('es-CO', {

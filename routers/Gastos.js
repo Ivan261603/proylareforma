@@ -47,7 +47,20 @@ Ruta_Gastos.post('/guardargastos',(peticion,respuesta)=>{
    });  
 }); 
 
+Ruta_Gastos.delete('/Eliminar',(peticion,respuesta)=>{
+    var idegresos= peticion.body.idegresos;
+    
+    var sql= `delete from egresos  where idegresos='${idegresos}'`;
 
+    conexion.query(sql,(err,rows,fields)=>{
+        if(!err){
+            respuesta.send('Se Elimino con Éxito');
+        }else{
+            console.log('no se realizo el proceso'+err);
+        }
+
+    });
+});
 
 
 
