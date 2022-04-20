@@ -1,5 +1,4 @@
 <head>
-nnnn
     <title>Gastos</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -59,7 +58,9 @@ nnnn
                         </div>
 
                     </div>
-                    <div class="col" ></div>
+                    <div class="col" >
+                        <input id="boton" class="btn btn-outline-warning" type="submit"value="Mostrar Mas..."onclick="Mostrar_ocultar()"/>
+                    </div>
                 </div>
 
               
@@ -70,14 +71,87 @@ nnnn
         </div>
 
     </div>
+ <!-- tabla de historial de gastos -->
+ <div class="container" id="caja">
+    <div><h3>Historial de Gastos</h3></div>
+    <table  class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Tipo de Gasto</th>
+                <th scope="col">Concepto</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Total Gasto</th>
+                <th scope="col">&#9940</th>
+                
+            </tr>
+        </thead>
+        <tbody id="tablaGasto">
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+        <tfoot></tfoot>
+    </table>
+
+
+</div>
+
 </body>
+ <!-- otro para alert2 -->
+ <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+//funciones para ocultar la tabla de gastos 
+Ocultar();
+    function Mostrar(){
+        document.getElementById('caja').style.display='block';
+
+        listar_egreso();
+    }
+    function Ocultar(){
+        document.getElementById('caja').style.display='none';
+    }
+    
+    function Mostrar_ocultar(){
+        var caja = document.getElementById('caja');
+
+        if(caja.style.display == "none"){
+           Mostrar();
+            document.getElementById('boton').value="Ocultar"
+        }
+        else{
+            Ocultar();
+            document.getElementById('boton').value="Mostrar Mas..."
+        }
+    }
+//funcion para guardar gastos
     function Guardar(){
         var fechaactual=document.getElementById('fecha').value;
         var tipo=document.getElementById('tipo').value;
         var Concepto=document.getElementById('Concepto').value;
         var total=document.getElementById('total').value;
         total=total.replace('.','');
+
+
+        if(tipo==='Seleccione El Concepto'){
+            alert('El campo de tipo de gasto es obligatorio')
+           document.getElementById('tipo').focus();
+           return false;
+        }
+        if(Concepto==''){
+            alert('El campo de Descripción es obligatorio')
+           document.getElementById('Concepto').focus();
+           return false;
+        }
+        if(total==''){
+            alert('El campo de Valor es obligatorio')
+           document.getElementById('total').focus();
+           return false;
+        }
+
         const datos= new URLSearchParams();
 
         datos.append('fecha',fechaactual);
@@ -133,4 +207,99 @@ nnnn
     
       document.getElementById('fecha').value = ano + '-' + mes + '-' + dia;
     }
+ //listar historial de gastos 
+ function listar_egreso(){
+
+const formatterPeso = new Intl.NumberFormat('es-CO', {
+  style: 'currency',
+  currency: 'COP',
+  minimumFractionDigits: 0
+})
+
+  fetch('/Gastos/listar_egreso',{
+    method:'get'
+
+})
+.then(resp=>resp.json())
+.then(data=>{
+ 
+
+
+
+  var html='';
+  for (var i in data){
+
+        html+=`<tr><td>${data[i].idegresos}</td>
+          
+          <td>${data[i].tipo}</td>
+          <td>${data[i].concepto}</td>
+          <td>${data[i].dates}</td>
+          <td>${formatterPeso.format(data[i].valor_gasto)}</td>
+          <td> </button><a class='btn btn-outline-danger' href ='javascript:Eliminar (${data[i].idegresos})'title= 'Eliminar' >&#9940</a></td>
+          
+          
+          </tr>`;
+          
+    }
+   
+   
+    document.getElementById("tablaGasto").innerHTML = html;
+   
+  
+});
+}
+
+
+//funcion de eliminar Gasto
+function Eliminar(idegresos) {
+  
+  
+  Swal.fire({
+    title: '¡Eliminar!',
+    text: "¿Esta seguro de Eliminar los Datos?",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#008000',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Si, Borrar!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire(
+        'Eliminado!',
+        'Se Eliminaron los Datos con Éxito .',
+        'success'
+      )
+  
+      const datos = new URLSearchParams();
+  
+      datos.append('idegresos', idegresos);
+  
+      fetch('Gastos/Eliminar', {
+        method: 'delete',
+        body: datos
+      })
+        .then(resp => resp.text())
+        .then(data => {
+  
+  
+   
+  
+  
+      //redirect();
+      //window.location = "http://localhost:4000/Reportes";
+      listar_egreso();
+        
+        });
+  
+  
+    }
+  })
+  
+
+  
+  }
+
+
+
+
 </script>

@@ -11,6 +11,22 @@ Ruta_Gastos.get('/',(peticion,respuesta)=>{
    
 });
 
+Ruta_Gastos.get('/listar_egreso', (peticion,respuesta)=>{
+   
+    var sql = `select *, Date_format(fecha,'%Y-%m-%d') as dates from egresos `;
+    conexion.query(sql,(error,rows,fields)=>{
+        conexion.query(sql,(err,rows,fields)=>{
+            if(!err){
+                respuesta.json(rows);
+            }else{
+                console.log('error de ejecución'+err);
+            }
+           }); 
+       
+    })
+})
+
+
 Ruta_Gastos.post('/guardargastos',(peticion,respuesta)=>{   
 
     
