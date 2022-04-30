@@ -40,7 +40,7 @@
          
         </div>
         <div class="input-group col md-6">
-          <input class="form-control" id="datos" type="number"  onkeyup="Buscar_datos();" placeholder="Buscar Documento"  data-toggle="tooltip" data-placement="top" title="Su busqueda solo la realizara por número de Documento">
+          <input class="form-control" id="datos" type="text"  onkeyup="Buscar_datos();" placeholder="Buscar Documento"  data-toggle="tooltip" data-placement="top" title="Su busqueda solo la realizara por número de Documento">
          
           <span class="input-group-btn">
            <button class="btn btn-light " type="button" onclick="Buscar_datos();" id="boton">
@@ -168,6 +168,9 @@
 </body>
     
 <script>
+//var para contar id personas
+  var contPersona = 0;
+
   listar_personas();
   
   
@@ -184,7 +187,8 @@
 
     var html='';
     for (var i in data){
-          html+=`<tr><td>${data[i].id_persona}</td>
+      contPersona += 1
+          html+=`<tr><td>${contPersona}</td>
             <td>${data[i].identificacion_p}</td>
             <td>${data[i].nombre_p}</td>
             <td>${data[i].direccion}</td>
@@ -218,7 +222,7 @@ if(id==''){
 
 datos.append('datos', id);
 
-fetch('/Registros/Buscar_datos',{
+fetch('/RegistroIng/Buscar_datos',{
 method: 'post',
 body: datos
 })

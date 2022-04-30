@@ -16,18 +16,18 @@
 </head>
 <body>
     <%- include ('barra_nav')%>
-    <h3> Gastos</h3>
-
-    <div class="container">
-        <div class="row">
-            <div class=" col-md-12 row p-2">
-                <div class="col-md-12">
+    <h3> Gastos </h3>
+    <div class="container w-100">
+        <div class="row ">
+          
+            <div class=" col-md-12  ">
+                <div class="">
                     <div class="col-md-2">
                     <label class="form-label">Fecha Gasto</label>
                     <input class="form-control" type="date" name="fecha" id="fecha">
                     </div>
                     <div class="col-md-6">
-                    <label  class="form-label">Tipo de Gastos</label>
+                    <label  class="form-label">Tipo de Gasto</label>
                     <select class="form-select" id="tipo" aria-label="Default select example">
                         <option selected>Seleccione El Concepto</option>
                         <option >Servicios</option>
@@ -35,7 +35,7 @@
                         <option >Otros</option>
                       </select>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-8">
                         <label for="exampleFormControlTextarea1" class="form-label">Descripción</label>
                         <textarea class="form-control" id="Concepto" rows="3"></textarea>
                     </div>
@@ -51,84 +51,72 @@
  
                 </div>
                 <div class="row">
-                    <div class="col" ></div>
-                    <div class="col-md-4">
+                    <div class="col"></div>
+                    <div class="col">
                         <div class="d-grid">
                             <button id="guardar" class="btn btn-light btn-lg" onclick="Guardar();" type="button">Guardar Gasto</button>
                         </div>
 
                     </div>
-                    <div class="col" >
-                        <input id="boton" class="btn btn-outline-warning" type="submit"value="Mostrar Mas..."onclick="Mostrar_ocultar()"/>
-                    </div>
+                    <div class="col  " ></div>
+
                 </div>
-
-              
-              
-
-
-            </div>
+            
+        </div>
+        <div class="col">
+         
         </div>
 
+
     </div>
- <!-- tabla de historial de gastos -->
- <div class="container" id="caja">
-    <div><h3>Historial de Gastos</h3></div>
-    <table  class="table table-hover">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Tipo de Gasto</th>
-                <th scope="col">Concepto</th>
-                <th scope="col">Fecha</th>
-                <th scope="col">Total Gasto</th>
-                <th scope="col">&#9940</th>
-                
-            </tr>
-        </thead>
-        <tbody id="tablaGasto">
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </tbody>
-        <tfoot></tfoot>
-    </table>
-
-
-</div>
+   
+   
 
 </body>
- <!-- otro para alert2 -->
- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+     <!-- otro para alert2 -->
+     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   
+     
+    
 <script>
+// var para contar idgasto
+    var contGasto = 0;
+    var offset = 0;
+  
 //funciones para ocultar la tabla de gastos 
-Ocultar();
-    function Mostrar(){
-        document.getElementById('caja').style.display='block';
 
-        listar_egreso();
+    /* function Mostrar(){
+        offset = 0;
+        document.getElementById('caja').style.display='block';
+        
+        
+        
     }
     function Ocultar(){
         document.getElementById('caja').style.display='none';
+        
+        offset=0;
     }
     
     function Mostrar_ocultar(){
+        
         var caja = document.getElementById('caja');
 
         if(caja.style.display == "none"){
            Mostrar();
             document.getElementById('boton').value="Ocultar"
+           
         }
         else{
             Ocultar();
             document.getElementById('boton').value="Mostrar Mas..."
+            
         }
-    }
+
+        
+    } */
 //funcion para guardar gastos
-    function Guardar(){
+        function Guardar(){
         var fechaactual=document.getElementById('fecha').value;
         var tipo=document.getElementById('tipo').value;
         var Concepto=document.getElementById('Concepto').value;
@@ -151,7 +139,6 @@ Ocultar();
            document.getElementById('total').focus();
            return false;
         }
-
         const datos= new URLSearchParams();
 
         datos.append('fecha',fechaactual);
@@ -173,7 +160,6 @@ Ocultar();
 
         });
         listar_egreso();
-       
     }
 /* funcion para agregar puntuación a los valores */
     function format(input)
@@ -208,9 +194,13 @@ Ocultar();
     
       document.getElementById('fecha').value = ano + '-' + mes + '-' + dia;
     }
- //listar historial de gastos 
- listar_egreso();
- function listar_egreso(){
+
+ 
+ 
+//listar historial de gastos 
+/* function listar_egreso(){
+    
+//var offset = 0;
 
 const formatterPeso = new Intl.NumberFormat('es-CO', {
   style: 'currency',
@@ -226,11 +216,11 @@ const formatterPeso = new Intl.NumberFormat('es-CO', {
 .then(data=>{
  
 
-
-
+ 
   var html='';
   for (var i in data){
-
+        contGasto += contGasto
+        
         html+=`<tr><td>${data[i].idegresos}</td>
           
           <td>${data[i].tipo}</td>
@@ -242,15 +232,79 @@ const formatterPeso = new Intl.NumberFormat('es-CO', {
           
           </tr>`;
           
+          
+    }
+    if(data ==0){
+        document.getElementById('buton').style='display:none';
+        document.getElementById('nodatos').innerHTML = 'No Mas Datos ';
+    }
+    console.log('iii'+offset);
+    
+   
+    //$('#tablaGsto').append(html);
+    var tabla = document.getElementById('tablaGasto');
+    tabla.insertAdjacentHTML('beforeend',html);
+
+    //document.getElementById("tablaGasto").innerHTML = html;
+    
+  
+});
+} */
+
+
+//mostar mas datos en la tabla 
+
+function mostrarMas(){
+    //var offset = 0;
+
+const formatterPeso = new Intl.NumberFormat('es-CO', {
+  style: 'currency',
+  currency: 'COP',
+  minimumFractionDigits: 0
+})
+
+  fetch('/Gastos/mostrarMas',{
+    method:'get'
+
+})
+.then(resp=>resp.json())
+.then(data=>{
+ 
+
+
+    contGasto=0;
+    offset = 0;
+  var html='';
+  for (var i in data){
+        contGasto += contGasto
+        
+        html+=`<tr><td>${data[i].idegresos}</td>
+          
+          <td>${data[i].tipo}</td>
+          <td>${data[i].concepto}</td>
+          <td>${data[i].dates}</td>
+          <td>${formatterPeso.format(data[i].valor_gasto)}</td>
+          <td> </button><a class='btn btn-outline-danger' href ='javascript:Eliminar (${data[i].idegresos})'title= 'Eliminar' >&#9940</a></td>
+          
+          
+          </tr>`;
+          
+          
     }
    
    
-    document.getElementById("tablaGasto").innerHTML = html;
    
+    //$('#tablaGsto').append(html);
+    var tabla = document.getElementById('tablaGasto');
+    tabla.insertAdjacentHTML('beforeend',html);
+
+    //document.getElementById("tablaGasto").innerHTML = html;
+    
   
 });
-}
+    
 
+}
 
 //funcion de eliminar Gasto
 function Eliminar(idegresos) {
@@ -300,8 +354,4 @@ function Eliminar(idegresos) {
 
   
   }
-
-
-
-
 </script>

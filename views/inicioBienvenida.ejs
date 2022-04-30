@@ -13,10 +13,15 @@
 </head>
 
 <body>
-    <%- include ('barra_nav')%>
-
-    <h3 class="h3">Bienvenido a la Reforma  </h3>
+    <%- include ('barra_nav') %>
    
+  
+    <h3 class="h3">Bienvenido a la Reforma </h3>
+      <% if (user){%>
+        <span class="badge bg-warning"><%= user %></span>
+      <% }%>
+     
+    
       <!-- <iframe src="" class="marco" frameborder="0"></iframe> -->
       
     
@@ -85,12 +90,16 @@
     <!-- <script src="/js/alert.js"></script> -->
    
     <script src="/js/script_cumple.js"></script>
+
+   
+
 </body>
 
 <!-- otro tipo de alert -->
 <!-- <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script> -->
 
 <script>
+ 
     listar_peticion();
      function listar_peticion(){
       fetch('/inicioBienvenida/listar_peticion',{
@@ -116,6 +125,7 @@
           
         }
         document.getElementById("tablas").innerHTML=html;
+        
         //document.getElementById("msg").innerHTML="<div class='alert alert-primary'role='alert'>Se listo la Noticia </div>";
         
       

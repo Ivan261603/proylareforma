@@ -268,6 +268,9 @@
 </body>
 
 <script>
+// contador de id de la tabla listar
+var contPersona = 0;
+
   listar_personas();
   listar_municipio();
   listar_departamento();
@@ -327,7 +330,8 @@
 
         var html = '';
         for (var i in data) {
-          html += `<tr><td>${data[i].id_persona}</td>
+          contPersona += 1
+          html += `<tr><td>${contPersona}</td>
           <td>${data[i].identificacion_p}</td>
           <td>${data[i].nombre_p}</td>
           <td>${data[i].dates}</td>

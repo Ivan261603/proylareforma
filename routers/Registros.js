@@ -3,9 +3,18 @@ const session = require('express-session');
 const Ruta_Registros = express.Router();
 const conexion = require('../conexion_bd');
 
+//para validar el ingreso a las rutas//
+function validar(peticion,respuesta,next){
+    if(peticion.session.usuario){
+        next();
+    }
+    else{
+        
+        respuesta.redirect('/');
+    }
+}
 
-
-Ruta_Registros.get('/',(peticion,respuesta)=>{
+Ruta_Registros.get('/',validar,(peticion,respuesta)=>{
     respuesta.render('index');
 
    
@@ -52,23 +61,7 @@ Ruta_Registros.get('/listar_personas',(peticion,respuesta)=>{
    }); 
 });
 
-/* buscador del modal reg ingre */
-Ruta_Registros.post('/Buscar_datos',(peticion,respuesta)=>{
-    
-    var ident=peticion.body.datos;
 
-    var sql ="select * from personas where identificacion_p ="+ident+" ";
-  
-    conexion.query(sql,(err,rows,fields)=>{
-
-    if(!err){
-        /* console.log(sql); */
-        respuesta.json(rows);
-    }else{
-        console.log('error de ejecución'+err);
-    }
-   }); 
-});
 
 Ruta_Registros.post('/Buscar_persona',(peticion,respuesta)=>{
 

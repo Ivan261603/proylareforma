@@ -3,7 +3,7 @@ const Ruta_inicioBienvenida = express.Router();
 const session = require('express-session');
 const conexion = require('../conexion_bd');
 
-
+//para validar el ingreso a las rutas//
 function validar(peticion,respuesta,next){
     if(peticion.session.usuario){
         next();
@@ -14,8 +14,9 @@ function validar(peticion,respuesta,next){
     }
 }
 
-Ruta_inicioBienvenida.get('/Bienvenida',(peticion,respuesta)=>{
-    respuesta.render('inicioBienvenida');
+Ruta_inicioBienvenida.get('/Bienvenida',validar,(peticion,respuesta)=>{
+    
+    respuesta.render('inicioBienvenida',{user:peticion.usuario});
 });
 
 Ruta_inicioBienvenida.get('/listar_peticion',(peticion,respuesta)=>{

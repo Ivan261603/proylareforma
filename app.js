@@ -8,10 +8,13 @@ const body_parser=require('body-parser');
 var session=require('express-session');
 const Ruta_Reportes = require('./routers/Reportes');
 const Ruta_Gastos = require('./routers/Gastos');
+const Ruta_HistoricoGasto = require('./routers/HistoricoGasto');
 const Ruta_ListarPersona = require('./routers/ListarPersona');
 
 var Servidor = express();
 
+//para encriptar password//
+const bcryptjs = require('bcryptjs');
 
 const multer = require('multer');
 const mimeTypes = require('mime-types');
@@ -37,7 +40,7 @@ Servidor.use(body_parser.urlencoded({extended:true}));
 
 
 Servidor.get('/',(peticion, respuesta)=>{
-    respuesta.render('validar');
+    respuesta.render('validar',{alert:false});
 });
 
 Servidor.post('/files',upload.single('avatar'),(peticion, respuesta)=>{
@@ -63,6 +66,7 @@ Servidor.use('/RegistroIng',Ruta_RegistroIng);
 Servidor.use('/inicioBienvenida',Ruta_inicioBienvenida);
 Servidor.use('/Reportes',Ruta_Reportes);
 Servidor.use('/Gastos',Ruta_Gastos);
+Servidor.use('/HistoricoGasto',Ruta_HistoricoGasto);
 Servidor.use('/ListarPersona',Ruta_ListarPersona);
 
 //puerto local

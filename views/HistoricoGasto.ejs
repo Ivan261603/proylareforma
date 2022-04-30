@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Historial de Gastos</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- link de bootstrap -->
+    <link href="/Enlaces/links/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+   <!--  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous"> -->
+    <!-- link de script -->
+     <!-- link de icono ventana -->
+     <link rel="shortcut icon" type="image/png" href="/img/icono.png">
+    <!-- link css -->
+    <link rel="stylesheet" href="/css/gastos.css">
+</head>
+<body>
+  <%- include ('barra_nav')%>
+  <div></div>
+  <div class="container mt-3 ">
+    <div class="row">
+      <div class="col " >
+        <div><h3>Historial de Gastos</h3></div>
+         <!-- tabla de historial de gastos -->
+        <table id="table" class="table table-hover" >
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Tipo de Gasto</th>
+                    <th scope="col">Concepto</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Total Gasto</th>
+                    <th scope="col">&#9940</th>
+                    
+                </tr>
+            </thead>
+            <tbody id="tablaGasto">
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+            <tfoot><td><button id="buton" class="btn btn-outline-warning" onclick="listar_egreso()">Ver Mas</button></td></tfoot>
+        </table>
+        <p id="nodatos"></p>
+    </div>
+    </div>
+  </div>
+
+
+</body>
+<!-- otro para alert2 -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+  var contGasto = 0;
+  var offset = 0;
+  listar_egreso();
+ 
+//listar historial de gastos 
+ function listar_egreso(){
+    
+//var offset = 0;
+
+const formatterPeso = new Intl.NumberFormat('es-CO', {
+  style: 'currency',
+  currency: 'COP',
+  minimumFractionDigits: 0
+})
+const datos= new URLSearchParams();
+
+datos.append('offset',offset);
+
+  fetch('/HistoricoGasto/listar_egreso',{
+    method:'post',
+    body:datos
+
+})
+
+.then(resp=>resp.json())
+.then(data=>{
+ 
+
+ 
+
+  var html='';
+  for (var i in data){
+        contGasto +=1
+        offset +=1
+        html+=`<tr><td>${contGasto}</td>
+          
+          <td>${data[i].tipo}</td>
+          <td>${data[i].concepto}</td>
+          <td>${data[i].dates}</td>
+          <td>${formatterPeso.format(data[i].valor_gasto)}</td>
+          <td> </button><a class='btn btn-outline-danger' href ='javascript:Eliminar (${data[i].idegresos})'title= 'Eliminar' >&#9940</a></td>
+          
+          
+          </tr>`;
+          
+          
+    }
+    console.log(offset);
+    if(data ==0){
+      
+        document.getElementById('buton').style='display:none';
+        document.getElementById('nodatos').innerHTML = 'No se Encontraron Mas Datos ';
+        
+    }
+    
+    
+   
+    //$('#tablaGsto').append(html);
+    var tabla = document.getElementById('tablaGasto');
+    tabla.insertAdjacentHTML('beforeend',html);
+
+    //document.getElementById("tablaGasto").innerHTML = html;
+    
+  
+});
+} 
+
+//funcion de eliminar Gasto
+function Eliminar(idegresos) {
+  
+  
+  Swal.fire({
+    title: '¡Eliminar!',
+    text: "¿Esta seguro de Eliminar los Datos?",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#008000',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Si, Borrar!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire(
+        'Eliminado!',
+        'Se Eliminaron los Datos con Éxito .',
+        'success'
+      )
+  
+      const datos = new URLSearchParams();
+  
+      datos.append('idegresos', idegresos);
+  
+      fetch('Gastos/Eliminar', {
+        method: 'delete',
+        body: datos
+      })
+        .then(resp => resp.text())
+        .then(data => {
+  
+  
+   
+  
+  
+      redirect();
+      //window.location = "http://localhost:4000/Reportes";
+      
+        
+        });
+        //listar_egreso();
+  
+  
+    }
+  })
+  
+
+  
+  }
+
+  function redirect(){
+    setTimeout("location.href='http://localhost:4000/HistoricoGasto'",2000);
+  }
+
+
+
+</script>
+</html>

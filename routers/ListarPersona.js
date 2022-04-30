@@ -4,8 +4,19 @@ const session = require('express-session');
 const conexion = require('../conexion_bd');
 
 
+//para validar el ingreso a las rutas//
+function validar(peticion,respuesta,next){
+    if(peticion.session.usuario){
+        next();
+    }
+    else{
+        
+        respuesta.redirect('/');
+    }
+}
 
-Ruta_ListarPersona.get('/',(peticion,respuesta)=>{
+
+Ruta_ListarPersona.get('/',validar,(peticion,respuesta)=>{
     respuesta.render('ListarPersona');
 
    

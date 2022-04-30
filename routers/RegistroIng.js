@@ -2,7 +2,20 @@ const express = require("express");
 const Ruta_RegistroIng = express.Router();
 const conexion = require('../conexion_bd');
 
-Ruta_RegistroIng.get('/',(peticion,respuesta)=>{
+
+//para validar el ingreso a las rutas//
+function validar(peticion,respuesta,next){
+    if(peticion.session.usuario){
+        next();
+    }
+    else{
+        
+        respuesta.redirect('/');
+    }
+}
+
+
+Ruta_RegistroIng.get('/',validar,(peticion,respuesta)=>{
     respuesta.render('RegistroIng');
 
    
@@ -47,6 +60,24 @@ Ruta_RegistroIng.post('/guardar',(peticion,respuesta)=>{
 
 
 }); 
+
+/* buscador del modal reg ingre */
+Ruta_RegistroIng.post('/Buscar_datos',(peticion,respuesta)=>{
+    
+    var ident=peticion.body.datos;
+
+    var sql =`select * from personas where nombre_p like '%${ident}%' or identificacion_p like '%${ident}%'`;
+  
+    conexion.query(sql,(err,rows,fields)=>{
+
+    if(!err){
+        /* console.log(sql); */
+        respuesta.json(rows);
+    }else{
+        console.log('error de ejecución'+err);
+    }
+   }); 
+});
 
 
 

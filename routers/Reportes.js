@@ -3,7 +3,19 @@ const session = require('express-session');
 const Ruta_Reportes = express.Router();
 const conexion = require('../conexion_bd');
 
-Ruta_Reportes.get('/',(peticion,respuesta)=>{
+//para validar el ingreso a las rutas//
+function validar(peticion,respuesta,next){
+    if(peticion.session.usuario){
+        next();
+    }
+    else{
+        
+        respuesta.redirect('/');
+    }
+}
+
+
+Ruta_Reportes.get('/',validar,(peticion,respuesta)=>{
     respuesta.render('reportes');
 
    

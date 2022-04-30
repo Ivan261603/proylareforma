@@ -14,7 +14,8 @@
     
         <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.0.0/js/buttons.print.min.js">
         <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.0.0/js/buttons.print.min.js">
-    
+      <!-- para barra de navegación  -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <!-- link de bootstrap -->
    <!--  <link href="/Enlaces/links/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous"> -->
     <!-- link de script -->
@@ -223,6 +224,9 @@
   var acutotal = 0;
   var gastotal = 0;
   
+//contador de id de las tablas
+  var contGasto = 0;
+  var contIngreso = 0;
 
   console.log()
  /* funcion listar ingresos */
@@ -314,9 +318,9 @@
             acutotal = 0;
             var html='';      
             for (var i in data){
-              
+              contIngreso +=1
               acutotal += parseFloat( data[i].total_ingreso)
-              html+=`<tr><td>${data[i].idingresos}</td>
+              html+=`<tr><td>${contIngreso}</td>
               <td>${data[i].nombre_p}</td>
               <td>${data[i].identificacion_p}</td>
               <td>${data[i].ofrenda}</td>
@@ -447,8 +451,8 @@
       var html='';
       for (var i in data){
         gastotal += parseFloat( data[i].valor_gasto)
-
-            html+=`<tr><td>${data[i].idegresos}</td>
+              contGasto += 1
+            html+=`<tr><td>${contGasto}</td>
               <td>${data[i].tipo}</td>
               <td>${data[i].concepto}</td>
               <td>${data[i].dates}</td>
