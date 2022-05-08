@@ -1,7 +1,4 @@
-body{
-    
-    background-color: skyblue;
-}
+
 /* botones de arri de la tabla */
 .dt-button.green{
     color: rgb(63, 235, 120);
@@ -63,10 +60,17 @@ table>tbody>tr>td {
     
   
 } 
-
+/* estilos para los totales de la tabla ingresos */
+.ttt{
+    background-color: #acabab !important;
+    color: white;
+    font-weight: bold;
+    font-family: cursive;
+}
 
 #ttt{
-    text-align: right;
+    text-align: center;
+   
     
 }
 #totEgre{

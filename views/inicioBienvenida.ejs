@@ -15,20 +15,25 @@
 <body>
     <%- include ('barra_nav') %>
    
-  
-    <h3 class="h3">Bienvenido a la Reforma </h3>
-      <% if (user){%>
-        <span class="badge bg-warning"><%= user %></span>
-      <% }%>
+    
+    <div  class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-1 pb-2 mb-1 border-bottom">
+    
+   <!-- <marquee behavior="" direction="rigth" width="25%"> --> <h3 id="h3" ></h3>
+      <h4>
+        <% if (usuario) { %>
+          <span class="badge "style ="background-color: #efb810">Usuario: &#128100  <%= usuario %></span>
+        <% } %>
+       </h4>
+    </div> 
      
     
       <!-- <iframe src="" class="marco" frameborder="0"></iframe> -->
       
     
-        <div class="container" >
+        <div class="container w-77  mt-5 rounded shadow" >
            
-          <div class="row">
-                  <div class="col-md-8 test-center">
+          <div class="row ">
+                  <div class="col test-center">
                     
                     <table id="tabla" class="table table-striped table-hover">
                         <thead>
@@ -37,15 +42,21 @@
                             <th scope="col">Pide Oración</th>
                             <th scope="col">Motivo de Oración</th>
                             <th scope="col">Admin</th>
+                            <th scope="col">&#9940</th>
                           </tr>
                         </thead>
                         <tbody  id="tablas">
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
                          
                         </tbody>
                       </table>
         
                 </div>
-                    <div  class="col-md-4">
+                    <div  class=" col  ">
+                      <form action="">
                           <h4>Registrar Petición</h4>
                           <div class="mb-3">
                             <label>id_Petición</label>
@@ -65,12 +76,14 @@
                               <button type="button" class="btn btn-warning btn-lg " onclick="actualizar_peticion()">Actualizar</button>
                           </div>
                         
-                          <footer>
-                            <button class="btn btn-warning btn-lg buscaVers">
-                              <a href="https://www.biblia.es/biblia-online.php" class='buscaVers' target="black">Ir a buscar un versiculo</a>
+                          <footer class="foot">
+                            
+                            <label for="buscaVers"> <a href="https://www.biblia.es/biblia-online.php" class='buscaVers' target="black"> &#x1f50d Ir a Buscar un Versículo</a></label>
                         
-                            </button>
+                            
                           </footer>
+
+                        </form>
                     
         
                     
@@ -99,7 +112,7 @@
 <!-- <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script> -->
 
 <script>
- 
+    listar_empresa();
     listar_peticion();
      function listar_peticion(){
       fetch('/inicioBienvenida/listar_peticion',{
@@ -115,11 +128,12 @@
           <td>${data[i].titulo}</td>
           <td>${data[i].motivo}</td>
           <td>  
-            <a href ='javascript:seleccionar_peticion(${data[i].id_Peticion})'>Seleccionar</a>
-            <a href ='javascript:Eliminar_peticion(${data[i].id_Peticion})'>Eliminar</a>
-                
+            <a href ='javascript:seleccionar_peticion(${data[i].id_Peticion})'>Seleccionar</a>    
             
           </td>
+          <td><a href ='javascript:Eliminar_peticion(${data[i].id_Peticion})'>Eliminar</a>
+          </td>
+
           
           </tr>`;
           
@@ -255,6 +269,30 @@
           } */
 
 
+//listar datos de la empresa//
 
+function listar_empresa(){
+      fetch('/inicio/listar_empresa',{
+        method:'get'
+
+    })
+    .then(resp=>resp.json())
+    .then(data=>{
+      var html='';
+      for (var i in data)
+          {
+        html+=`<span> &#x27a3 ${ data[i].n_empresa} </span>`
+          
+        }
+        document.getElementById("h3").innerHTML= html;
+        
+        //document.getElementById("msg").innerHTML="<div class='alert alert-primary'role='alert'>Se listo la Noticia </div>";
+        
+      
+
+
+
+    });
+    }
     
 </script>

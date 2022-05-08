@@ -17,7 +17,7 @@
 
 <body>
 
-
+  
       <!-- barra de navegación -->
      <!--  <nav class="navbar navbar-expand-lg navbar-light" >
        
@@ -37,7 +37,7 @@
     <!-- fin carrusel -->
     
 <!-- form de login -->
-<div class="container w-77 bg-warning mt-5 rounded shadow">
+<div class="container w-77  bg-warning mt-5 rounded shadow">
   <div class="row align-items-stretch">
     <div class="col bg d-none d-lg-block col-md-5 col-lg-5 col-xl-6 rounded"></div>
 
@@ -175,7 +175,7 @@
    datos.append('nombre_per',nombre_per);
    datos.append('_usuario',_usuario);
    datos.append('contraseña',contraseña);
-  
+  console.log()
    fetch('inicio/registrar_usuario',{
      method: 'Post',
      body:datos

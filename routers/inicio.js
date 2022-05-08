@@ -103,4 +103,37 @@ Ruta_inicio.post('/registrar_usuario',async(peticion,respuesta)=>{
    }); 
 });
 
+//registro de los datos de la empresa modal el vista inicio//
+
+Ruta_inicio.post('/regist',(peticion,respuesta)=>{
+    var id_em = peticion.body.id_em;
+    var n_empresa = peticion.body.n_empresa;
+    var direccion_em = peticion.body.direccion_em;
+    var telefono_em = peticion.body.telefono_em;
+
+    var sql= `update empresa set n_empresa='${n_empresa}',direccion_em='${direccion_em}',telefono_em='${telefono_em}' where id=${id_em}`;
+    
+    console.log(sql);
+    conexion.query(sql,(err,rows,fields)=>{
+        if(!err){
+            respuesta.send("Registrada con Éxito");
+        }else{
+            console.log('error de ejecución'+err);
+        }
+       }); 
+})
+
+//listar los datos de la empresa en la vista inicioB//
+
+Ruta_inicio.get('/listar_empresa',(peticion,respuesta)=>{
+    var sql ="select * from empresa";
+   conexion.query(sql,(err,rows,fields)=>{
+    if(!err){
+        respuesta.json(rows);
+    }else{
+        console.log('error de ejecución'+err);
+    }
+   }); 
+});
+
 module.exports=Ruta_inicio;
