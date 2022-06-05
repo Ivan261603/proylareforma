@@ -1,22 +1,54 @@
 
-
 ul li{
     background-color: #efb810;
 }
-.fin a{
+ a{
     color: black;
 }
+h5{
+    font-family: cursive;
+    margin-right: -1em;
+    font-size: medium;
+    text-align: center;
+    margin: 0 auto;
+    color: rgb(253, 253, 253);
+    
+}
+/* span para el usuario */
+#user{
+    color: rgb(18, 19, 19);
+    
+}
+/* span para nom empresa */
+#h3{
+    font-family: cursive;
+    margin-top: 1em;
+    background-color: #efb810;
+    padding: 5px;
+    border-radius: 5px;
+    color: rgb(65, 65, 63);
+    
+    box-shadow: 0 0 5px;
+}
 
+/* modal de regis empresa */
+.modal-header{
+    background-color: #f7c738; 
+}
+
+ 
 .nav-link{
     margin-left:3px;
     font-family: cursive;
     border-radius: 5px;
     background-color: #f7c11f;
     
+    
+    
 }
-/* .nav-link:hover{
-    background-color: #e9d8a96d;
-} */
+.nav-link:hover{
+    background-color: #e6cd8b2a;
+}
 .btn{
     font-family: cursive;
     

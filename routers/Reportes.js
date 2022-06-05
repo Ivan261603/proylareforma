@@ -16,7 +16,7 @@ function validar(peticion,respuesta,next){
 
 
 Ruta_Reportes.get('/',validar,(peticion,respuesta)=>{
-    respuesta.render('reportes');
+    respuesta.render('reportes',{usuario:peticion.session.usuario});
 
    
 });

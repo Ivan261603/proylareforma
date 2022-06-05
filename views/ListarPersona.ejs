@@ -6,6 +6,7 @@
   <!-- link de bootstrap -->
   <link href="/Enlaces/links/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    
   <!-- para buscador de select -->
   <link rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/css/bootstrap-select.min.css">
@@ -33,12 +34,12 @@
 
 <body>
   <%- include ('barra_nav')%>
-    <h4> Lista De Personas</h4>
+   
 
     <!-- inicio de modal editar persona -->
     <!-- Button trigger modal -->
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="ediper" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-xl">
         <div class="modal-content">
           <div class="modal-header">
@@ -184,10 +185,11 @@
     </div>
     <!-- fin modal listarpersona -->
 
-    <div class="container">
+    <div class="container mt-2">
       <div class="row">
         <div class=" col-md-12 row p-2">
           <table class="table table-hover" id="tabla">
+            <h4> Lista De Personas</h4>
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -268,8 +270,9 @@
 </body>
 
 <script>
-// contador de id de la tabla listar
-var contPersona = 0;
+//Var Para contar id de la tabla listar persona
+  var contPersona = 0;
+
 
   listar_personas();
   listar_municipio();
@@ -327,7 +330,7 @@ var contPersona = 0;
         });
 
 
-
+        contPersona =0;
         var html = '';
         for (var i in data) {
           contPersona += 1
@@ -346,7 +349,7 @@ var contPersona = 0;
           
           <td> 
                 
-                  <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#ediper">
                     <a href ='javascript:Seleccionar_persona(${data[i].id_persona})' title='Editar'>&#9998</a>
                    
                     <td> </button><a class='btn btn-outline-danger' href ='javascript:Eliminar (${data[i].id_persona})'title= 'Eliminar' >&#9940</a></td>

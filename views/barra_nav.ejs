@@ -16,6 +16,9 @@
     <!-- link de script -->
     <script src="/Enlaces/scrips/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script> -->
+   
+    <!-- link para iconos -->
+    <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
     <!-- link css -->
     <link rel="stylesheet" href="/css/navbar.css">
 </head>
@@ -52,50 +55,54 @@
           </div>
         </div>
       </div>
+      <!-- fin modal -->
 
-      <a class="navbar-brand" href="#"></a>
+      <a class="navbar-brand " href="#"  data-bs-toggle="modal" data-bs-target="#exampleModal" title="ingresar datos de la empresa">
+        <span id="h3" ></span>
+      </a>
        
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav" >
-          <li class="nav-item dropdown">
+          <li> <a class="nav-link active" aria-current="page" href="/inicioBienvenida/Bienvenida"><i class="icon ion-md-home p-1"></i> Inicio</a></li>
+       <!--    <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Inicio
+              <i class="icon ion-md-home p-2"></i> Inicio
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <li> <a class="nav-link active" aria-current="page" href="/inicioBienvenida/Bienvenida"> Inicio</a></li>
+             
               <li><a class="nav-link "><button type="button" class="nav-link btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Registrar Empresa
+                <i class="icon ion-md-business p-2"></i> Registrar Empresa
               </button></a></li>
               
             </ul>
-          </li>
+          </li> -->
        
           <li class="nav-item dropdown">
           <!--   <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" role="button"  aria-expanded="true">
                 Personas
             </a> -->
             <!-- <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink"> -->
-              <li class="nav-item"><a class=" nav-link active" href="/Registros">Registrar Persona</a>
+              <li class="nav-item"><a class=" nav-link active" href="/Registros"><i class="icon ion-md-person "></i> Registrar Persona</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " aria-current="page" href="/ListarPersona">Listar Personas</a>
+                <a class="nav-link " aria-current="page" href="/ListarPersona"><i class="icon ion-md-contacts "></i> Listar Personas</a>
               </li>
               
             
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/RegistroIng">Registrar Ingreso</a>
+            <a class="nav-link" href="/RegistroIng"><i class="icon ion-md-medkit "></i> Registrar Ingreso</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Gastos
+              <i class="icon ion-md-basket "></i> Gastos
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <li> <a class="nav-link " href="/Gastos">Nuevo Gasto</a></li>
-              <li><a class="nav-link " href="/HistoricoGasto">Historial de Gastos</a></li>
+              <li> <a class="nav-link " href="/Gastos"><i class="icon ion-md-medkit "></i> Nuevo Gasto</a></li>
+              <li><a class="nav-link " href="/HistoricoGasto"><i class="icon ion-md-filing "></i> Historial de Gastos</a></li>
               
             </ul>
           </li>
@@ -106,30 +113,49 @@
             <a class="nav-link " href="/Gastos/listar_egreso">Nuevo4 Gasto</a>
           </li> -->
           <li class="nav-item">
-            <a class="nav-link"href="/Reportes">Reportes</a>
+            <a class="nav-link"href="/Reportes"><i class="icon ion-md-stats "></i> Reportes</a>
           </li>
           
           
         </ul>
+      
       </div>
+      <div class="dropdown">
+        
+        <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+          <% if (usuario) { %>
+            <span id="user" class="dropdown-menu6"> <i class="icon ion-md-person "></i>  <%= usuario %></span>
+          <% } %>
+        </button>
+        <ul  class=" dropdown-menu bg-warning" aria-labelledby="dropdownMenuButton1">
+          <li >
+            <a id="user" class=" nav-link "href="/"><i class="icon ion-md-exit  "></i>  Salir </a>
+          </li>
+        </ul>
+      </div>
+   
+    
+      
+       
+      
     </div>
-    <nav class="collapse navbar-collapse" id="navbarNavDropdown"style="background-color: #efb810;">
-        <div class="fin">
+   <!--  <nav class="collapse navbar-collapse" id="navbarNavDropdown"style="background-color: #efb810;"> -->
+        <!-- <div class="fin"> -->
           
           <!-- <form class="d-flex"> -->
-            <li>
-              <a class=" nav-link" href="/">Cerrar_Sesión</a></li>
+            
            
             
           
             
         <!--  btn btn-defaull nav-cerrar </form> -->
-        </div>
-      </nav>
+       <!--  </div>
+      </nav> -->
   </nav>
 <!-- fin barra de navegación -->
 
 <script>
+  listar_empresa();
 //guardar datos de la empresa//
    function guardar(){
     var id_em = document.getElementById('id_em').value;
@@ -164,6 +190,32 @@
    });
    
 }
+
+//listar datos de la empresa//
+
+function listar_empresa(){
+      fetch('/inicio/listar_empresa',{
+        method:'get'
+
+    })
+    .then(resp=>resp.json())
+    .then(data=>{
+      var html='';
+      for (var i in data)
+          {
+        html+=`<span id="empresa">  ${ data[i].n_empresa} </span>`
+          
+        }
+        document.getElementById("h3").innerHTML= html;
+        
+        
+        
+      
+
+
+
+    });
+    }
 
 
 

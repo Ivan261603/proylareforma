@@ -1,5 +1,5 @@
 *{
-    padding: 2px;
+    padding: 1px;
 }
 
 h4{
@@ -66,8 +66,8 @@ label{
     
    /*  height: 60%; */
 }
-/* estilos del modal buscar personas */
 
+/* estilos del modal buscar personas */
 .modal-header{
     background-color: #f7c738;
     

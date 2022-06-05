@@ -2,7 +2,6 @@ const express = require("express");
 const Ruta_RegistroIng = express.Router();
 const conexion = require('../conexion_bd');
 
-
 //para validar el ingreso a las rutas//
 function validar(peticion,respuesta,next){
     if(peticion.session.usuario){
@@ -16,7 +15,7 @@ function validar(peticion,respuesta,next){
 
 
 Ruta_RegistroIng.get('/',validar,(peticion,respuesta)=>{
-    respuesta.render('RegistroIng');
+    respuesta.render('RegistroIng',{usuario:peticion.session.usuario});
 
    
 });
@@ -48,8 +47,8 @@ Ruta_RegistroIng.post('/guardar',(peticion,respuesta)=>{
     var sql =`insert into ingresos (ofrenda,diezmo,primicia,otros,fecha_i,personas,total_ingreso) values(${ofrenda},${diezmo},${primicia},${otros}, '${fecha}',${id_persona},'${total}')`;
     
    console.log(sql)
-   
-    conexion.query(sql,(err,rows,fields)=>{
+   console.log(sql2)
+    conexion.query(sql,sql2,(err,rows,fields)=>{
     if(!err){
      
         respuesta.send("Se Registraron con exito los ingresos");
@@ -60,24 +59,6 @@ Ruta_RegistroIng.post('/guardar',(peticion,respuesta)=>{
 
 
 }); 
-
-/* buscador del modal reg ingre */
-Ruta_RegistroIng.post('/Buscar_datos',(peticion,respuesta)=>{
-    
-    var ident=peticion.body.datos;
-
-    var sql =`select * from personas where nombre_p like '%${ident}%' or identificacion_p like '%${ident}%'`;
-  
-    conexion.query(sql,(err,rows,fields)=>{
-
-    if(!err){
-        /* console.log(sql); */
-        respuesta.json(rows);
-    }else{
-        console.log('error de ejecución'+err);
-    }
-   }); 
-});
 
 
 

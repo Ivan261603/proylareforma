@@ -17,7 +17,7 @@ function validar(peticion,respuesta,next){
 
 
 Ruta_Gastos.get('/',validar,(peticion,respuesta)=>{
-    respuesta.render('Gastos');
+    respuesta.render('Gastos',{usuario:peticion.session.usuario});
 
    
 });

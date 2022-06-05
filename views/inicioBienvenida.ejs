@@ -16,14 +16,14 @@
     <%- include ('barra_nav') %>
    
     
-    <div  class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-1 pb-2 mb-1 border-bottom">
+   <!--  <div  class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-1 pb-2 mb-1 border-bottom"> -->
     
-   <!-- <marquee behavior="" direction="rigth" width="25%"> --> <h3 id="h3" ></h3>
-      <h4>
+   <!-- <marquee behavior="" direction="rigth" width="25%"> -->
+    <!--   <h4>
         <% if (usuario) { %>
-          <span class="badge "style ="background-color: #efb810">Usuario: &#128100  <%= usuario %></span>
+          <span id="user" class=" badge bg-warning"> <i class="icon ion-md-person p-2"></i>  <%= usuario %></span>
         <% } %>
-       </h4>
+       </h4> -->
     </div> 
      
     
@@ -78,9 +78,11 @@
                         
                           <footer class="foot">
                             
-                            <label for="buscaVers"> <a href="https://www.biblia.es/biblia-online.php" class='buscaVers' target="black"> &#x1f50d Ir a Buscar un Versículo</a></label>
+                            <label for="buscaVers"> <a href="https://www.biblia.es/biblia-online.php" class='buscaVers' target="black">  &#128269 Ir a Buscar un Versículo</a></label>
                         
-                            
+                            <label for="buscaVers"> <a href="https://www.facebook.com/" class='buscaVers' target="black">  
+                              <i class="icon ion-logo-facebook"></i> Ir a Facebook
+                            </a></label>
                           </footer>
 
                         </form>
@@ -112,7 +114,7 @@
 <!-- <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script> -->
 
 <script>
-    listar_empresa();
+    
     listar_peticion();
      function listar_peticion(){
       fetch('/inicioBienvenida/listar_peticion',{
@@ -199,6 +201,18 @@
     })
     .then(res=>res.text())
     .then(data=>{
+
+      if(titulo==''){
+        alert('el campo Titulo es Obligatorio');
+        document.getElementById('titulo').focus();
+           return false;
+      }
+
+      if(motivo==''){
+        alert('el campo Titulo es Obligatorio');
+        document.getElementById('motivo').focus();
+           return false;
+      }
                 
           alert(data);     
                
@@ -226,6 +240,18 @@
         .then(res=>res.text())
         .then(data=>{
 
+
+      if(titulo==''){
+        alert('el campo Titulo es Obligatorio');
+        document.getElementById('titulo').focus();
+           return false;
+        }
+
+      if(motivo==''){
+        alert('el campo Titulo es Obligatorio');
+        document.getElementById('motivo').focus();
+           return false;
+        }
             alert(data);
 
              titulo=document.getElementById('titulo').value='';
@@ -269,30 +295,6 @@
           } */
 
 
-//listar datos de la empresa//
 
-function listar_empresa(){
-      fetch('/inicio/listar_empresa',{
-        method:'get'
-
-    })
-    .then(resp=>resp.json())
-    .then(data=>{
-      var html='';
-      for (var i in data)
-          {
-        html+=`<span> &#x27a3 ${ data[i].n_empresa} </span>`
-          
-        }
-        document.getElementById("h3").innerHTML= html;
-        
-        //document.getElementById("msg").innerHTML="<div class='alert alert-primary'role='alert'>Se listo la Noticia </div>";
-        
-      
-
-
-
-    });
-    }
     
 </script>

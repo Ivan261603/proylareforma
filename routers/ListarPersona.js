@@ -3,7 +3,6 @@ const Ruta_ListarPersona = express.Router();
 const session = require('express-session');
 const conexion = require('../conexion_bd');
 
-
 //para validar el ingreso a las rutas//
 function validar(peticion,respuesta,next){
     if(peticion.session.usuario){
@@ -16,15 +15,16 @@ function validar(peticion,respuesta,next){
 }
 
 
+
 Ruta_ListarPersona.get('/',validar,(peticion,respuesta)=>{
-    respuesta.render('ListarPersona');
+    respuesta.render('ListarPersona',{usuario:peticion.session.usuario});
 
    
 });
 
 //listar tabla personas
 Ruta_ListarPersona.get('/listar_personas',(peticion,respuesta)=>{
-    var sql ="select *, Date_format(fecha,'%Y-%m-%d') as dates from personas left join departamentos on personas.id_departamento=departamentos.id_departamento left join municipios on personas.id_municipio=municipios.id_municipio where estado_p= 1";
+    var sql ="select *, Date_format(fecha,'%Y-%m-%d') as dates from personas  left join departamentos on personas.id_departamento=departamentos.id_departamento left join municipios on personas.id_municipio=municipios.id_municipio where estado_p= 1 order by nombre_p asc";
     //var sql ="select *,Date_format(fecha,'%Y-%m-%d') as dates  from personas";
    conexion.query(sql,(err,rows,fields)=>{
     if(!err){
